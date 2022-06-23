@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-block-login{
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 400px;
+    width: 700px;
+    border-radius: 3px;
+    border:#c3c3c3 1px solid;
+
+    -webkit-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+}
+
+
+.form-block-login form input{
+    outline:none;
+    width: 500px;
+    height: 30px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #EFEFEF;
+    font-size: 15px;
+}
+
+.form-block-login form label{
+    margin-left: 20px;
+}
+
+.form-block-login form button{
+    border: #EFEFEF;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100px;
+    height: 50px;
+    margin-left: 20px;
+}
+
+.form-block-login form button:hover{
+    border: #3f3f3f;
+    background-color: #3f3f3f;
+    color: #EFEFEF;
+}
+
+.form-block-login h1{
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
