@@ -6,13 +6,13 @@ import {
     Link
 } from "react-router-dom";
 
+import "./NavBar.css";
 
 import Main from "../main/Main";
 import UserPage from "../user/UserPage";
-
-import "./NavBar.css";
 import Register from "../auth/registration/Register";
 import Login from "../auth/login/Login";
+import Post from "../post/post preview/Post";
 
 function NavBar(){
     return(
@@ -41,6 +41,7 @@ function NavBar(){
                     <Route path="/user" element={<UserPage/>}/>
                     <Route path="/registration" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/post" element={<Post/>}/>
                 </Routes>
             </Router>
         </div>
