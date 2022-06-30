@@ -1,12 +1,22 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import "./Main.css";
 
 import filter from "../../icons/filter.svg";
 import sort from "../../icons/sort.svg";
 
+import PostCard from "../post/postcard/PostCard";
+
 function Main(){
 
+    const [posts, setPosts] = useState(null);
+    const url = 'https://localhost:5001/api/Post';
+
+    useEffect(() => {
+        fetch(url)
+            .then((response) => response.json())
+            .then((actualData) => setPosts(actualData));
+    }, []);
 
     return(
         <div>
@@ -21,9 +31,7 @@ function Main(){
                         </li>
                     </ul>
                 </div>
-                <div className="content-block-posts">
-
-                </div>
+                <PostCard posts={posts}/>
             </div>
         </div>
     );

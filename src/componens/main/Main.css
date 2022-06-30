@@ -25,3 +25,10 @@
     display: inline;
     margin: 10px;
 }
+
+.content-block-posts{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+

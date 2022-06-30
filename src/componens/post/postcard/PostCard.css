@@ -1,0 +1,15 @@
+.post-block{
+    border: black 1px solid;
+    margin: 10px;
+}
+
+.post-block img{
+    margin: 0 auto;
+    width:200px;
+}
+
+
+/*.post-block:hover{*/
+/*    width:500px;*/
+/*    transition: 0.3s;*/
+/*}*/
