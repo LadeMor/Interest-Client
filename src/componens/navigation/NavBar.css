@@ -6,7 +6,7 @@
 }
 
 nav{
-    background-color: #FF9966;
+    background-color: #6633FF;
     margin-bottom: 10px;
     height: 80px;
     color: #282c34;
@@ -27,5 +27,5 @@ nav a{
     height: 50px;
     margin: 0 auto;
     text-decoration: none;
-    color: black;
+    color: white;
 }
