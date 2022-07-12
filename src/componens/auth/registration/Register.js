@@ -14,6 +14,11 @@ function Register(){
                         type="text"
                         name="username"
                     />
+                    <label>Description</label>
+                    <textarea name="description"
+                              maxlength="200">
+
+                    </textarea>
                     <label>Email</label>
                     <input
                         type="email"
