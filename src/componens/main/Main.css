@@ -65,9 +65,12 @@
     margin: 10px;
 }
 
-.content-block-posts{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+
+.no-res-msg{
+    font-size: 30px;
+    color: #939393;
+    display: block;
+    margin: 0 auto;
 }
 
 

@@ -9,6 +9,7 @@ import PostCard from "../post/postcard/PostCard";
 
 function Main(){
 
+    const [resExist, setResExist] = useState(true);
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState(null);
     const [searchData, setSearchData] = useState(null);
@@ -33,23 +34,23 @@ function Main(){
 
         if(searchData.trim() === ''){
             setData(posts);
+            setResExist(true);
         }else if(posts.filter(post => post.title.toLowerCase().includes(searchData)) == ''){
-            console.log('No result');
+            setResExist(false);
         } else{
+            setResExist(true);
             setData(posts
                 .filter(post => post
                     .title
                     .toLowerCase()
                     .includes(searchData)));
         }
-
-
-
     };
 
     return(
         <div>
             <div className="content-block-tools">
+                <h1>Tools</h1>
                 <ul>
                     <li>
                         <img src={filter}/>
@@ -66,28 +67,12 @@ function Main(){
                         <button type="submit">Search</button>
                     </form>
                 </div>
-                <PostCard posts={data}/>
+                {resExist ?
+                    <PostCard posts={data}/> :
+                    <div className="no-res-msg">
+                        <h1>No Result</h1>
+                    </div>}
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/><br/>
-            <br/>
-            <br/><br/>
-            <br/>
-            <br/>
-
-
         </div>
     );
 }

@@ -1,15 +1,37 @@
+
+
 .post-block{
+    background-color: #6633FF;
+    color: white;
     border: black 1px solid;
     margin: 10px;
+    width: 250px;
+    text-align: center;
+    border-radius: 20px;
+    -webkit-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    transition: 0.3s;
+}
+
+.post-block:hover{
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .post-block img{
+    display: block;
     margin: 0 auto;
-    width:200px;
+    width:250px;
 }
 
 
-/*.post-block:hover{*/
-/*    width:500px;*/
-/*    transition: 0.3s;*/
-/*}*/
+.content-block-posts{
+
+}
+
+.content-block-posts a{
+    text-decoration: none;
+    color: black;
+}
