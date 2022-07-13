@@ -13,6 +13,7 @@ import UserPage from "../user/UserPage";
 import Register from "../auth/registration/Register";
 import Login from "../auth/login/Login";
 import Post from "../post/post preview/Post";
+import PostCreate from "../post/post create/PostCreate";
 
 function NavBar(){
     return(
@@ -45,6 +46,7 @@ function NavBar(){
                     <Route path="/registration" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/post" element={<Post/>}/>
+                    <Route path="/post_create" element={<PostCreate/>}/>
                 </Routes>
             </Router>
         </div>

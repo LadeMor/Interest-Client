@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./UserPage.css";
+import {Link} from "react-router-dom";
 
 function UserPage(){
     return(
@@ -15,7 +16,9 @@ function UserPage(){
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a
                     </p>
                 </div>
-                <button>Create post +</button>
+                <Link to="/post_create">
+                    <button>Create post +</button>
+                </Link>
             </div>
         </div>
     );
