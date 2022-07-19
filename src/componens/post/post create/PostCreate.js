@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import ReactDOM from "react-dom/client";
 
 import './PostCreate.css';
 
@@ -7,6 +8,8 @@ function PostCreate(){
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    const [isSuccess, setSuccess] = useState(false);
+    const [isFailed, setFailed] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,13 +26,21 @@ function PostCreate(){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        }).then(() => console.log("Post created"))
-            .catch(() => console.error("Error in creating"))
-            .finally(() => {
-                setTitle('');
-                setDescription('');
-                setImage('');
-            })
+        }).then(() => {
+            setSuccess(true);
+            setTimeout(() => {
+                setSuccess(false);
+            }, 2000);
+        }).catch(() => {
+            setFailed(true);
+            setTimeout(() => {
+                setFailed(false);
+                }, 2000);
+        }).finally(() => {
+            setTitle('');
+            setDescription('');
+            setImage('');
+        })
     }
 
     return(
@@ -64,6 +75,12 @@ function PostCreate(){
                         Submit
                     </button>
                 </form>
+            </div>
+            <div className={`successful-create ${isSuccess ? "" : "hide"}`}>
+                <h1>Post successfully created</h1>
+            </div>
+            <div className={`failed-create hide ${isFailed ? "" : "hide"}`}>
+                <h1>Something went wrong</h1>
             </div>
         </div>
     );
