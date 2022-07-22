@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Link
+    Link, useParams
 } from "react-router-dom";
 
 import "./NavBar.css";
@@ -12,10 +12,13 @@ import Main from "../main/Main";
 import UserPage from "../user/UserPage";
 import Register from "../auth/registration/Register";
 import Login from "../auth/login/Login";
-import Post from "../post/post preview/Post";
+import PostPage from "../post/post page/PostPage";
 import PostCreate from "../post/post create/PostCreate";
 
 function NavBar(){
+
+    let {postId} = useParams();
+
     return(
         <div className="nav-block">
             <Router>
@@ -34,9 +37,6 @@ function NavBar(){
                             <li>
                                 <Link to="/login">Login</Link>
                             </li>
-                            <li>
-                                <Link to="/post">Post Preview</Link>
-                            </li>
                         </ul>
                     </nav>
                 </header>
@@ -45,7 +45,7 @@ function NavBar(){
                     <Route path="/user" element={<UserPage/>}/>
                     <Route path="/registration" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    <Route path="/post" element={<Post/>}/>
+                    <Route path="/post/:postId" element={<PostPage/>}/>
                     <Route path="/post_create" element={<PostCreate/>}/>
                 </Routes>
             </Router>

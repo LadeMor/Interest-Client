@@ -3,7 +3,7 @@ import React from "react";
 import "./PostCard.css";
 import {BrowserRouter, Link, Route} from "react-router-dom";
 
-import Post from "../post preview/Post";
+import PostPage from "../post page/PostPage";
 
 function PostCard({posts}){
 
