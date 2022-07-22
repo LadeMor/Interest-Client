@@ -1,0 +1,24 @@
+.preview-content{
+    display: block;
+    margin: 0 auto;
+    width: 800px;
+}
+
+.back_arrow_block{
+
+    left: 370px;
+    position: absolute;
+    border: 1px solid #6633FF;
+    border-radius: 30px;
+    padding: 5px;
+    transition: 0.3s;
+}
+
+.back_arrow_block:hover{
+    background-color: #6633FF;
+}
+
+.back_arrow_block img{
+    margin: 0 auto;
+    width: 40px;
+}
