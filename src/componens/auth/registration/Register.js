@@ -32,13 +32,7 @@ function Register(){
         return resEmail;
     }
 
-    function addUser(usernameB, emailB, passwordB){
-        if(usernameB && emailB && passwordB){
-            console.log("Good!");
-        }
-    }
-
-    async function validateUserData(userDb, sendReq){
+    async function validateUserData(userDb){
 
         let usernameIsCorrect = false;
         let emailIsCorrect = false;
@@ -79,12 +73,15 @@ function Register(){
             console.log('Enter password!');
         }
 
-        sendReq(usernameIsCorrect, emailIsCorrect, passwordIsCorrect);
+        return usernameIsCorrect && emailIsCorrect && passwordIsCorrect;
+
 
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const urlUser = 'https://localhost:5001/api/User';
 
         const userData = {
             username: username,
@@ -94,7 +91,18 @@ function Register(){
             roleId:2
         };
 
-        validateUserData(userData, addUser);
+        validateUserData(userData).then(function(result){
+            if(result){
+               fetch(urlUser, {
+                   method:"POST",
+                   headers: {
+                       'Content-Type': 'application/json'
+                   },
+                   body: JSON.stringify(userData)
+               }).then(() => console.log('Success'))
+                   .catch(() => console.log('Error'))
+            }
+        })
 
     }
 
