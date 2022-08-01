@@ -18,18 +18,18 @@
 }
 
 
-.form-block-login form input{
-    outline:none;
-    width: 500px;
-    height: 30px;
-    margin-top:20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    display: block;
-    border: none;
-    border-bottom: 2px solid #EFEFEF;
-    font-size: 15px;
-}
+/*.form-block-login form input{*/
+/*    outline:none;*/
+/*    width: 500px;*/
+/*    height: 30px;*/
+/*    margin-top:20px;*/
+/*    margin-bottom: 20px;*/
+/*    margin-left: 20px;*/
+/*    display: block;*/
+/*    border: none;*/
+/*    border-bottom: 2px solid #EFEFEF;*/
+/*    font-size: 15px;*/
+/*}*/
 
 .form-block-login form label{
     margin-left: 20px;
@@ -56,4 +56,56 @@
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 25px;
+}
+
+.email-input{
+    outline:none;
+    width: 500px;
+    height: 30px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #EFEFEF;
+    font-size: 15px;
+}
+
+.password-input{
+    outline:none;
+    width: 500px;
+    height: 30px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #EFEFEF;
+    font-size: 15px;
+}
+
+.wrong-data{
+    border: 2px solid red;
+}
+
+.error-validation-msg{
+    color: red;
+    margin-top: -10px;
+    margin-right: 180px;
+    text-align: right ;
+}
+
+.empty-values{
+    color: red;
+    margin-top: -10px;
+    margin-right: 180px;
+    text-align: right ;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
 }
