@@ -12,6 +12,7 @@ function Login(){
     const [emptyValues, setEmptyValues] = useState(false);
 
     function addDataToStorage(data){
+        localStorage.setItem('isUserLogin', true);
         localStorage.setItem('UserId', data.id);
         localStorage.setItem('Username', data.username);
         localStorage.setItem('UserPassword', data.password);
@@ -67,6 +68,7 @@ function Login(){
         validateLoginData().then(res => {
             if(res){
                 addDataToStorage(res);
+                window.location.reload()
             }
 
         })

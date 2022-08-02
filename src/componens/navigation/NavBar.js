@@ -19,6 +19,21 @@ function NavBar(){
 
     let {postId} = useParams();
 
+    const exitFromAccount = () => {
+        let userSure = window.confirm("Are you sure you want to log out of your account?");
+        if(userSure){
+            localStorage.setItem('isUserLogin', "false");
+            localStorage.setItem('UserId', '');
+            localStorage.setItem('Username', '');
+            localStorage.setItem('UserPassword', '');
+            localStorage.setItem('UserEmail', '');
+            localStorage.setItem('UserDescription', '');
+            localStorage.setItem('UserRoleId', '');
+            window.location.reload()
+        }
+
+    };
+
     return(
         <div className="nav-block">
             <Router>
@@ -37,6 +52,13 @@ function NavBar(){
                             <li>
                                 <Link to="/login">Login</Link>
                             </li>
+                            {localStorage.getItem('isUserLogin') === 'true' ?
+                                <li>
+                                    <button className="exit-button" onClick={exitFromAccount}>Exit</button>
+                                </li>
+                                :
+                                ''}
+
                         </ul>
                     </nav>
                 </header>
