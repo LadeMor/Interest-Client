@@ -1,0 +1,45 @@
+.user-list{
+    width: 700px;
+    border-radius: 10px;
+    padding: 10px;
+    margin:20px;
+    border: 2px solid gray;
+}
+
+.user-list ul{
+    list-style-type: none;
+}
+
+.user-info-row{
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.user-info-row button{
+    border-radius: 10px;
+    border-color: black;
+    background-color: white;
+    font-size: 15px;
+    height: 40px;
+    width: 60px;
+    margin-left: 15px;
+    transition: .3s;
+}
+
+.user-info-row button:hover{
+    background-color: red;
+    color: white;
+}
+
+.user-name{
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+.user-description{
+    font-size: 20px;
+    margin-left: 10px;
+}
+

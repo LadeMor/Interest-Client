@@ -14,6 +14,7 @@ import Register from "../auth/registration/Register";
 import Login from "../auth/login/Login";
 import PostPage from "../post/post page/PostPage";
 import PostCreate from "../post/post create/PostCreate";
+import AdminPage from "../admin/AdminPage";
 
 function NavBar(){
 
@@ -52,13 +53,20 @@ function NavBar(){
                             <li>
                                 <Link to="/login">Login</Link>
                             </li>
+                            {localStorage.getItem('UserRoleId') ?
+                                <li>
+                                    <Link to="/admin">Admin Page</Link>
+                                </li>
+                                :
+                                ''
+                            }
                             {localStorage.getItem('isUserLogin') === 'true' ?
                                 <li>
                                     <button className="exit-button" onClick={exitFromAccount}>Exit</button>
                                 </li>
                                 :
-                                ''}
-
+                                ''
+                            }
                         </ul>
                     </nav>
                 </header>
@@ -69,6 +77,7 @@ function NavBar(){
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/post/:postId" element={<PostPage/>}/>
                     <Route path="/post_create" element={<PostCreate/>}/>
+                    <Route path="/admin" element={<AdminPage/>}/>
                 </Routes>
             </Router>
         </div>
