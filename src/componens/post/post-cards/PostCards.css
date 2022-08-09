@@ -1,0 +1,12 @@
+.post-cards{
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+    justify-content: flex-start;
+}
+
+.post-cards a{
+    text-decoration: none;
+    color: black;
+}

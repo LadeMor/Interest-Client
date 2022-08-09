@@ -5,7 +5,7 @@ import "./Main.css";
 import filter from "../../icons/filter.svg";
 import sort from "../../icons/sort.svg";
 
-import PostCard from "../post/postcard/PostCard";
+import PostCards from "../post/post-cards/PostCards";
 
 function Main(){
 
@@ -68,7 +68,7 @@ function Main(){
                     </form>
                 </div>
                 {resExist ?
-                    <PostCard posts={data}/> :
+                    <PostCards post={data}/> :
                     <div className="no-res-msg">
                         <h1>No Result</h1>
                     </div>}

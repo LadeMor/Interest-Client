@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 
 import "./AdminPage.css";
+import UserList from "./user-list/UserList";
 
 function AdminPage(){
 
@@ -15,21 +16,7 @@ function AdminPage(){
 
     return(
         <div className='admin-page'>
-            <div className='user-list'>
-                <h1>Users</h1>
-                <ul>
-                    {userList &&
-                        userList.map(user => (
-                            <li key={user.id}>
-                                <div className='user-info-row'>
-                                    <span className='user-name'>{user.username}</span>
-                                    <span className='user-description'>{user.description}</span>
-                                    <button>Block</button>
-                                </div>
-                            </li>
-                        ))}
-                </ul>
-            </div>
+            <UserList userList={userList}/>
         </div>
     );
 }

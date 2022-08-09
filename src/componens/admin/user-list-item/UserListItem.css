@@ -1,0 +1,11 @@
+.user-list-item{
+    border: 1px solid black;
+    margin-top:10px;
+    border-radius: 10px;
+    text-align: left;
+}
+.user-list-item button{
+    display: inline;
+    margin:5px;
+    float: right;
+}
