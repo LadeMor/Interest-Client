@@ -35,7 +35,7 @@ function Main(){
         if(searchData.trim() === ''){
             setData(posts);
             setResExist(true);
-        }else if(posts.filter(post => post.title.toLowerCase().includes(searchData)) == ''){
+        }else if(posts.filter(post => post.title.toLowerCase().includes(searchData)) === ''){
             setResExist(false);
         } else{
             setResExist(true);

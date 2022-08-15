@@ -3,3 +3,27 @@
     max-width: 500px;
     text-align: center;
 }
+
+.user-list form button{
+    height: 34px;
+    border-radius: 0 10px 10px 0;
+    border: 1px solid;
+    font-size: 15px;
+    border: #EFEFEF;
+    background-color: #EFEFEF;
+    transition: .3s;
+}
+
+.user-list form button:hover{
+    border: #3f3f3f;
+    background-color: #3f3f3f;
+    color: #EFEFEF;
+}
+
+.user-list form input{
+    width: 300px;
+    height: 30px;
+    border: #3f3f3f 1px solid;
+    border-radius: 10px 0 0 10px;
+    font-size: 15px;
+}
