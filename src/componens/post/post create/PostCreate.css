@@ -6,9 +6,11 @@
 
 
 .form-block-create-post{
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin: 0 auto;
     margin-top: 50px;
-    height: 530px;
+    margin-bottom: 50px;
     width: 700px;
     border-radius: 3px;
     border:#c3c3c3 1px solid;
@@ -90,6 +92,19 @@
     border: 1px solid red;
 }
 
+.image-preview{
+    margin-left: 20px;
+    height: 300px;
+    width: 300px;
+    border: 1px solid #EFEFEF;
+}
+
+.image-preview img{
+    height: 300px;
+    width: 300px;
+}
+
 .hide{
     display: none;
 }
+
