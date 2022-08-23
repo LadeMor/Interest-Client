@@ -42,9 +42,11 @@ function PostCreate(){
         e.preventDefault();
 
         const data = {
+            user_Id:localStorage.getItem('UserId'),
             title: title,
             image: image,
-            post_Description: description
+            post_Description: description,
+            author: localStorage.getItem('Username')
         };
 
         fetch("https://localhost:5001/api/Post", {

@@ -53,7 +53,7 @@ function NavBar(){
                             <li>
                                 <Link to="/login">Login</Link>
                             </li>
-                            {localStorage.getItem('UserRoleId') ?
+                            {+localStorage.getItem('UserRoleId') === 1?
                                 <li>
                                     <Link to="/admin">Admin Page</Link>
                                 </li>

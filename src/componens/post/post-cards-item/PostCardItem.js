@@ -10,6 +10,7 @@ function PostCardItem({id, title, image, post_Description, author}){
                 <h1>{title}</h1>
                 <img src={`${image}`}/>
                 <p>{post_Description}</p>
+                <h3>{author}</h3>
             </div>
         </Link>
     );
