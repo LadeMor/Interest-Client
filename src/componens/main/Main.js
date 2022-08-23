@@ -4,8 +4,10 @@ import "./Main.css";
 
 import filter from "../../icons/filter.svg";
 import sort from "../../icons/sort.svg";
+import create from "../../icons/create.svg";
 
 import PostCards from "../post/post-cards/PostCards";
+import {Link} from "react-router-dom";
 
 function Main(){
 
@@ -53,13 +55,18 @@ function Main(){
                 <h1>Tools</h1>
                 <ul>
                     <li>
-                        <img src={filter}/>
+                        <img src={filter} alt='filter'/>
                     </li>
                     <li>
-                        <img src={sort}/>
+                        <img src={sort} alt='sort'/>
                     </li>
                 </ul>
             </div>
+            <Link to="/post_create">
+                <div className='create-post-button'>
+                    <img src={create} alt='create-post'/>
+                </div>
+            </Link>
             <div className="content-block">
                 <div className="search-from">
                     <form onSubmit={handleSubmit}>
