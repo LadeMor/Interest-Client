@@ -27,3 +27,43 @@
     margin-bottom: 20px;
     margin-right: 20px;
 }
+
+.post-page-buttons{
+    display: block;
+    width: 240px;
+}
+
+.post-page-edit-button{
+    border: #EFEFEF;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100px;
+    transition: 0.3s;
+    margin: 10px;
+    height: 40px;
+}
+
+.post-page-delete-button{
+    border: 1px solid rgba(255, 0, 0, 0.63);
+    background-color: rgba(255, 0, 0, 0.63);
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    width: 100px;
+    transition: 0.3s;
+    margin: 10px;
+    height: 40px;
+}
+
+.post-page-edit-button:hover{
+    border: #3f3f3f;
+    background-color: #3f3f3f;
+    color: #EFEFEF;
+}
+
+.post-page-delete-button:hover{
+    border: #3f3f3f;
+    background-color: rgb(255, 0, 0);
+    color: #EFEFEF;
+}

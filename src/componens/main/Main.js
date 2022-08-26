@@ -62,11 +62,12 @@ function Main(){
                     </li>
                 </ul>
             </div>
-            <Link to="/post_create">
+            {localStorage.getItem('isUserLogin') === 'true' ? <Link to="/post_create">
                 <div className='create-post-button'>
                     <img src={create} alt='create-post'/>
                 </div>
-            </Link>
+            </Link> :
+            ''}
             <div className="content-block">
                 <div className="search-from">
                     <form onSubmit={handleSubmit}>

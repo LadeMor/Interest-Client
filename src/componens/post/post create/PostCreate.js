@@ -42,7 +42,7 @@ function PostCreate(){
         e.preventDefault();
 
         const data = {
-            user_Id:localStorage.getItem('UserId'),
+            user_Id: +localStorage.getItem('UserId'),
             title: title,
             image: image,
             post_Description: description,
