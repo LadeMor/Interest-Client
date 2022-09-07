@@ -1,8 +1,7 @@
 .post-cards{
     width: 1000px;
     display: grid;
-    grid-template-columns: 30% 150px 50%;
-    grid-template-rows: 200px 300px;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .post-cards a{

@@ -1,5 +1,6 @@
 import React from "react";
 import PostCardItem from "../post-cards-item/PostCardItem";
+import './PostCards.css';
 
 function PostCards({post}){
     return(
