@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-
 import PostPreview from "../post preview/PostPreview";
+import InterestService from "../../interest-service/InterestService";
 
 import "./PostPage.css";
 
@@ -11,6 +11,7 @@ import arrow_back from '../../../icons/arrow-back.svg';
 function PostPage(){
 
     const {postId} = useParams();
+    const interestService = new InterestService();
 
     const [postArr, setPostArr] = useState({
         title: '',
@@ -18,15 +19,12 @@ function PostPage(){
         description: '',
         author: ''
     });
-    const url = `https://localhost:5001/api/Post/${postId}`;
 
     useEffect(() => {
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
+        interestService.getPost(postId)
+            .then(data => {
                 setPostArr(data)
             })
-            .catch(() => console.error('Something goes wrong'));
     }, []);
 
     return(

@@ -1,36 +1,17 @@
 import React, {useEffect, useState} from "react";
+import InterestService from "../../interest-service/InterestService";
 
 import "./Register.css";
 
 
 function Register(){
 
+    const interestService = new InterestService();
     const [username, setUsername] = useState('');
     const [description, setDescription] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [profilePhoto, setProfilePhoto] = useState('');
-
-
-    async function isUserExistByUsername (userDb) {
-        const urlUsername = `https://localhost:5001/api/User/${userDb.username}/exist`;
-
-         const resUsername = await fetch(urlUsername)
-            .then(responseUsername => responseUsername.json())
-            .then(dataUsername => dataUsername);
-
-        return resUsername;
-    }
-
-    async function isUserExistByEmail (userDb) {
-        const urlEmail = `https://localhost:5001/api/User/${userDb.email}/user`;
-
-        const resEmail = await fetch(urlEmail)
-            .then(responseEmail => responseEmail.json())
-            .then(dataEmail => dataEmail);
-
-        return resEmail;
-    }
 
     async function validateUserData(userDb){
 
@@ -39,7 +20,7 @@ function Register(){
         let passwordIsCorrect = false;
 
         if(userDb.username.trim() !== ''){
-            await isUserExistByUsername(userDb).then(res => {
+            await interestService.isUserExistUsername(userDb.username).then(res => {
                 if(res){
                     usernameIsCorrect = false;
                     console.log('This username is exist!');
@@ -53,7 +34,7 @@ function Register(){
         }
 
         if(userDb.email.trim() !== ''){
-            await isUserExistByEmail(userDb).then(res => {
+            await interestService.isUserExistEmail(userDb.email).then(res => {
                 if(res){
                     emailIsCorrect = false;
                     console.log('This email is exist!');
@@ -74,14 +55,10 @@ function Register(){
         }
 
         return usernameIsCorrect && emailIsCorrect && passwordIsCorrect;
-
-
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const urlUser = 'https://localhost:5001/api/User';
 
         const userData = {
             username: username,
@@ -93,17 +70,11 @@ function Register(){
 
         validateUserData(userData).then(function(result){
             if(result){
-               fetch(urlUser, {
-                   method:"POST",
-                   headers: {
-                       'Content-Type': 'application/json'
-                   },
-                   body: JSON.stringify(userData)
-               }).then(() => console.log('Success'))
+               interestService.addUser(userData)
+                   .then(() => console.log('Success'))
                    .catch(() => console.log('Error'))
             }
         })
-
     }
 
     return(

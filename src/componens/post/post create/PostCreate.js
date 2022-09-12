@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
-
+import InterestService from "../../interest-service/InterestService";
 import './PostCreate.css';
 
 import preview from '../../../icons/photo-image-picture.svg'
 
 function PostCreate(){
 
+    const interestService = new InterestService();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
@@ -49,13 +50,7 @@ function PostCreate(){
             author: localStorage.getItem('Username')
         };
 
-        fetch("https://localhost:5001/api/Post", {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(() => {
+        interestService.createPost(data).then(() => {
             setSuccess(true);
             setTimeout(() => {
                 setSuccess(false);

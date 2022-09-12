@@ -1,9 +1,10 @@
 import {useState} from "react";
-
+import InterestService from "../../interest-service/InterestService";
 import "./Login.css";
 
 function Login(){
 
+    const interestService = new InterestService();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -25,27 +26,21 @@ function Login(){
 
         if(email.trim() !== '' && password.trim() !== ''){
 
-            const userByEmailUrl = `https://localhost:5001/api/User/${email}/userbyemail`;
-            const userExistEmailUrl = `https://localhost:5001/api/User/${email}/user`;
-
             let res;
             let userDataObj;
 
-            await fetch(userExistEmailUrl)
-                .then((data) => data.json())
+            await interestService.isUserExistEmail(email)
                 .then(actualData => {
                      res = actualData;
                 });
 
             if(res){
-                await fetch(userByEmailUrl)
-                    .then(data => data.json())
+                await interestService.getUserByEmail(email)
                     .then(userData => userDataObj = userData[0]);
             }else{
                 setEmailErrorMag(true);
                 setTimeout(() => setEmailErrorMag(false), 2000);
             }
-
 
             if(userDataObj.password === password){
                 return userDataObj;

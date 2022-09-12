@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
+import PostCards from "../post/post-cards/PostCards";
+import {Link} from "react-router-dom";
+import InterestService from "../interest-service/InterestService";
 
 import "./Main.css";
 
 import filter from "../../icons/filter.svg";
 import sort from "../../icons/sort.svg";
 import create from "../../icons/create.svg";
-
-import PostCards from "../post/post-cards/PostCards";
-import {Link} from "react-router-dom";
 
 function Main(){
 
@@ -17,11 +17,11 @@ function Main(){
     const [searchData, setSearchData] = useState(null);
     const [posts, setPosts] = useState(null);
     const url = 'https://localhost:5001/api/Post';
+    const interestService = new InterestService();
 
     useEffect(() => {
-        fetch(url)
-            .then((response) => response.json())
-            .then((actualData) => {
+        interestService.getAllPosts()
+            .then(actualData => {
                 setPosts(actualData);
                 setData(actualData);
             })

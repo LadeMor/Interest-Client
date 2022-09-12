@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from "react";
+import InterestService from "../interest-service/InterestService";
 
 import "./AdminPage.css";
 import UserList from "./user-list/UserList";
 
+
 function AdminPage(){
 
-    const url = 'https://localhost:5001/api/User';
+    const interestService = new InterestService();
     const [userList, setUserList] = useState('');
 
     useEffect(() => {
-       fetch(url)
-           .then(res => res.json())
-           .then(data => setUserList(data))
+        interestService.getAllUsers()
+            .then(data => setUserList(data))
     });
 
     return(
