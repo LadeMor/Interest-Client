@@ -8,6 +8,7 @@ import "./Main.css";
 import filter from "../../icons/filter.svg";
 import sort from "../../icons/sort.svg";
 import create from "../../icons/create.svg";
+import spinner from "../../icons/Rolling-1s-200px.svg";
 
 function Main(){
 
@@ -16,7 +17,6 @@ function Main(){
     const [filteredData, setFilteredData] = useState(null);
     const [searchData, setSearchData] = useState(null);
     const [posts, setPosts] = useState(null);
-    const url = 'https://localhost:5001/api/Post';
     const interestService = new InterestService();
 
     useEffect(() => {
@@ -75,11 +75,12 @@ function Main(){
                         <button type="submit">Search</button>
                     </form>
                 </div>
-                {resExist ?
+                {data === 'undefined' || data === null ? <img src={spinner} alt="spinner"/>
+                    : (resExist ?
                     <PostCards post={data}/> :
                     <div className="no-res-msg">
                         <h1>No Result</h1>
-                    </div>}
+                    </div>)}
             </div>
         </div>
     );
