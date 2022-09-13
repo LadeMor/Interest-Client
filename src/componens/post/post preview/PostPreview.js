@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-
+import CommentList from "../../comment-list/CommentList";
 import './PostPreview.css';
 
 import preview from "../../../icons/photo-image-picture.svg";
@@ -90,52 +90,55 @@ function PostPreview({postData}){
     }, [imgFile]);
 
     return(
-        <div className='post-preview'>
-            <div className={`blur ${editForm ? '' : 'hide'}`} onClick={hideEditForm}></div>
-            <div className={`update-post-form ${editForm ? '' : 'hide'}`}>
-                <form onSubmit={confimUpdate}>
-                    <label>Title</label>
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="Enter post title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <label>Description</label>
-                    <textarea
-                        name="description"
-                        maxLength="200"
-                        placeholder="Enter post description..."
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <label>Image</label>
-                    <div className='update-post-preview'>
-                        <img alt='preview' src={previewPhoto}/>
-                    </div>
-                    <input
-                        className='file-input'
-                        type="file"
-                        accept="image/*"
-                        name="image"
-                        onChange={onChangePicture}
-                    />
-                    <button type="submit">Edit</button>
-                    <button onClick={hideEditForm}>Cancel</button>
-                </form>
+        <>
+            <div className='post-preview'>
+                <div className={`blur ${editForm ? '' : 'hide'}`} onClick={hideEditForm}></div>
+                <div className={`update-post-form ${editForm ? '' : 'hide'}`}>
+                    <form onSubmit={confimUpdate}>
+                        <label>Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Enter post title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <label>Description</label>
+                        <textarea
+                            name="description"
+                            maxLength="200"
+                            placeholder="Enter post description..."
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                        <label>Image</label>
+                        <div className='update-post-preview'>
+                            <img alt='preview' src={previewPhoto}/>
+                        </div>
+                        <input
+                            className='file-input'
+                            type="file"
+                            accept="image/*"
+                            name="image"
+                            onChange={onChangePicture}
+                        />
+                        <button type="submit">Edit</button>
+                        <button onClick={hideEditForm}>Cancel</button>
+                    </form>
+                </div>
+                <h1>{postData.title}</h1>
+                <img src={`${postData.image}`} alt='post'/>
+                <p>{postData.post_Description}</p>
+                {+localStorage.getItem('UserId') === postData.user_Id || +localStorage.getItem('UserRoleId') === 1?
+                    <div className='post-page-buttons'>
+                        <button className='post-page-edit-button' onClick={editItem}>Edit</button>
+                        <button className='post-page-delete-button' onClick={deleteItem}>Delete</button>
+                    </div> :
+                    ''
+                }
             </div>
-            <h1>{postData.title}</h1>
-            <img src={`${postData.image}`} alt='post'/>
-            <p>{postData.post_Description}</p>
-            {+localStorage.getItem('UserId') === postData.user_Id || +localStorage.getItem('UserRoleId') === 1?
-                <div className='post-page-buttons'>
-                    <button className='post-page-edit-button' onClick={editItem}>Edit</button>
-                    <button className='post-page-delete-button' onClick={deleteItem}>Delete</button>
-                </div> :
-                ''
-            }
-        </div>
+            <CommentList/>
+        </>
     );
 }
 

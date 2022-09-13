@@ -1,0 +1,14 @@
+.comment-list-item{
+    border-radius: 10px;
+    border:#c3c3c3 1px solid;
+    margin-right: 20px;
+    margin-left: -20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-list-item h4, p{
+    margin: 5px;
+}
+
+

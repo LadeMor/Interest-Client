@@ -1,0 +1,19 @@
+.comment-list{
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 800px;
+    border-radius: 20px;
+    border:#c3c3c3 1px solid;
+
+    -webkit-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+}
+
+.comment-list h1{
+    margin: 10px;
+}
+
+.comment-list ul{
+    list-style-type: none;
+}
