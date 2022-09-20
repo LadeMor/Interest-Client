@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import PostPreview from "../post preview/PostPreview";
-import InterestService from "../../interest-service/InterestService";
+import InterestService from "../../../services/interest-service/InterestService";
 
 import "./PostPage.css";
 

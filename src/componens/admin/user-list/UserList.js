@@ -96,7 +96,7 @@ function UserList({userList}){
                 <ul>
                     {users &&
                         users.map(user => (
-                            <UserListItem id={user.id} username={user.username} email={user.email}/>
+                            <UserListItem user={user}/>
                         ))}
                 </ul>
             </div>

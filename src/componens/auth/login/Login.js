@@ -1,13 +1,14 @@
 import {useState} from "react";
-import InterestService from "../../interest-service/InterestService";
+import InterestService from "../../../services/interest-service/InterestService";
 import "./Login.css";
 
 function Login(){
 
     const interestService = new InterestService();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
+    const [formData, setFromData] = useState({
+        email: '',
+        password:''
+    });
     const [emailErrorMsg, setEmailErrorMag] = useState(false);
     const [passwordErrorMsg, setPasswordErrorMsg] = useState(false);
     const [emptyValues, setEmptyValues] = useState(false);
@@ -24,25 +25,25 @@ function Login(){
 
     async function validateLoginData(){
 
-        if(email.trim() !== '' && password.trim() !== ''){
+        if(formData.email.trim() !== '' && formData.password.trim() !== ''){
 
             let res;
             let userDataObj;
 
-            await interestService.isUserExistEmail(email)
+            await interestService.isUserExistEmail(formData.email)
                 .then(actualData => {
                      res = actualData;
                 });
 
             if(res){
-                await interestService.getUserByEmail(email)
+                await interestService.getUserByEmail(formData.email)
                     .then(userData => userDataObj = userData[0]);
             }else{
                 setEmailErrorMag(true);
                 setTimeout(() => setEmailErrorMag(false), 2000);
             }
 
-            if(userDataObj.password === password){
+            if(userDataObj.password === formData.password){
                 return userDataObj;
             }else{
                 setPasswordErrorMsg(true);
@@ -81,7 +82,10 @@ function Login(){
                             className={`email-input ${emailErrorMsg ? 'wrong-data' : ''}`}
                             type="email"
                             name="email"
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={e => setFromData({
+                                ...formData,
+                                email: e.target.value
+                            })}
                         />
                         <h5 className={`error-validation-msg ${emailErrorMsg ? 'show' : 'hide'}`}>User is not exist</h5>
                         <h5 className={`empty-values ${emptyValues ? 'show' : 'hide'}`}>Input data!</h5>
@@ -90,7 +94,10 @@ function Login(){
                             className={`password-input ${passwordErrorMsg ? 'wrong-data' : ''}`}
                             type="password"
                             name="password"
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={e => setFormData({
+                                ...formData,
+                                password: e.target.value
+                            })}
                         />
                         <h5 className={`error-validation-msg ${passwordErrorMsg ? 'show' : 'hide'}`}>Wrong password</h5>
                         <h5 className={`empty-values ${emptyValues ? 'show' : 'hide'}`}>Input data!</h5>

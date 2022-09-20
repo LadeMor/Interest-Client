@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import PostCards from "../post/post-cards/PostCards";
 import {Link} from "react-router-dom";
-import InterestService from "../interest-service/InterestService";
+import InterestService from "../../services/interest-service/InterestService";
 
 import "./Main.css";
 
@@ -12,40 +12,58 @@ import spinner from "../../icons/Rolling-1s-200px.svg";
 
 function Main(){
 
-    const [resExist, setResExist] = useState(true);
-    const [data, setData] = useState(null);
-    const [filteredData, setFilteredData] = useState(null);
-    const [searchData, setSearchData] = useState(null);
-    const [posts, setPosts] = useState(null);
     const interestService = new InterestService();
+    // const [resExist, setResExist] = useState(true);
+    // const [data, setData] = useState(null);
+    // const [filteredData, setFilteredData] = useState(null);
+    // const [searchData, setSearchData] = useState(null);
+    // const [posts, setPosts] = useState(null);
+
+    const [mainData, setMainData] = useState({
+        resExist: true,
+        data: null,
+        filteredData: null,
+        searchData: '',
+        posts: null
+    })
+
 
     useEffect(() => {
         interestService.getAllPosts()
             .then(actualData => {
-                setPosts(actualData);
-                setData(actualData);
+                setMainData({
+                    ...mainData,
+                    posts: actualData,
+                    data: actualData
+                })
             })
     }, []);
 
     const handleChange = (e) => {
-        setSearchData(e.target.value.toLowerCase());
+        setMainData({...mainData, searchData: e.target.value.toLowerCase()});
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(searchData.trim() === ''){
-            setData(posts);
-            setResExist(true);
-        }else if(posts.filter(post => post.title.toLowerCase().includes(searchData)) === ''){
-            setResExist(false);
+        if(mainData.searchData.trim() === ''){
+            setMainData({
+                ...mainData,
+                data: mainData.posts,
+                resExist: true
+            })
+        }else if(mainData.posts.filter(post => post.title.toLowerCase().includes(mainData.searchData)) === ''){
+            setMainData({...mainData, resExist: false})
         } else{
-            setResExist(true);
-            setData(posts
+            setMainData({
+                ...mainData,
+                data: mainData.posts
                 .filter(post => post
                     .title
                     .toLowerCase()
-                    .includes(searchData)));
+                    .includes(mainData.searchData)),
+                resExist: true
+            });
         }
     };
 
@@ -75,9 +93,9 @@ function Main(){
                         <button type="submit">Search</button>
                     </form>
                 </div>
-                {data === 'undefined' || data === null ? <img src={spinner} alt="spinner"/>
-                    : (resExist ?
-                    <PostCards post={data}/> :
+                {mainData.data === 'undefined' || mainData.data === null ? <img src={spinner} alt="spinner"/>
+                    : (mainData.resExist ?
+                    <PostCards post={mainData.data}/> :
                     <div className="no-res-msg">
                         <h1>No Result</h1>
                     </div>)}

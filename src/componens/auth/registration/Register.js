@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import InterestService from "../../interest-service/InterestService";
+import InterestService from "../../../services/interest-service/InterestService";
 
 import "./Register.css";
 
@@ -7,11 +7,13 @@ import "./Register.css";
 function Register(){
 
     const interestService = new InterestService();
-    const [username, setUsername] = useState('');
-    const [description, setDescription] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [profilePhoto, setProfilePhoto] = useState('');
+    const [userData, setUserData] = useState({
+        username: '',
+        description: '',
+        email: '',
+        password: '',
+        profilePhoto: ''
+    });
 
     async function validateUserData(userDb){
 
@@ -60,17 +62,17 @@ function Register(){
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const userData = {
-            username: username,
-            password: password,
-            email: email,
-            description: description,
+        const data = {
+            username: userData.username,
+            password: userData.password,
+            email: userData.email,
+            description: userData.description,
             roleId:2
         };
 
         validateUserData(userData).then(function(result){
             if(result){
-               interestService.addUser(userData)
+               interestService.addUser(data)
                    .then(() => console.log('Success'))
                    .catch(() => console.log('Error'))
             }
@@ -87,31 +89,46 @@ function Register(){
                         className = 'error-value'
                         type="text"
                         name="username"
-                        onChange={e => setUsername(e.target.value)}
+                        onChange={e => setUserData({
+                            ...userData,
+                            username: e.target.value
+                        })}
                     />
                     <label>Description</label>
                     <textarea name="description"
                               maxLength="200"
-                              onChange={e => setDescription(e.target.value)}>
+                              onChange={e => setUserData({
+                                  ...userData,
+                                  description: e.target.value
+                              })}>
 
                     </textarea>
                     <label>Email</label>
                     <input
                         type="email"
                         name="email"
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={e => setUserData({
+                            ...userData,
+                            email: e.target.value
+                        })}
                     />
                     <label>Password</label>
                     <input
                         type="password"
                         name="password"
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={e => setUserData({
+                            ...userData,
+                            password: e.target.value
+                        })}
                     />
                     <label>Profile photo</label>
                     <input
                         type="text"
                         name="profilpic"
-                        onChange={e => setProfilePhoto(e.target.value)}
+                        onChange={e => setUserData({
+                            ...userData,
+                            profilePhoto: e.target.value
+                        })}
                     />
                     <button type="submit">
                         Submit

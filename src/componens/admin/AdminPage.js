@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import InterestService from "../interest-service/InterestService";
+import InterestService from "../../services/interest-service/InterestService";
 
 import "./AdminPage.css";
 import UserList from "./user-list/UserList";

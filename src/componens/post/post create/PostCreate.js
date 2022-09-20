@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import InterestService from "../../interest-service/InterestService";
+import InterestService from "../../../services/interest-service/InterestService";
 import './PostCreate.css';
 
 import preview from '../../../icons/photo-image-picture.svg'
@@ -7,63 +7,71 @@ import preview from '../../../icons/photo-image-picture.svg'
 function PostCreate(){
 
     const interestService = new InterestService();
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const [imgFile, setImgFile] = useState('');
-    const [isSuccess, setSuccess] = useState(false);
-    const [isFailed, setFailed] = useState(false);
-    const [previewPhoto, setPreviewPhoto] = useState('');
+    const [postCreateData, setPostCreateData] = useState({
+        title: '',
+        description: '',
+        image: '',
+        imgFile: null,
+        isSuccess: false,
+        isFailed: false,
+        previewPhoto: ''
+    })
 
     const fileInputRef = useRef("");
 
     const onChangePicture = (e) => {
         const file = e.target.files[0];
         if(file && file.type.substr(0,5) === "image"){
-            setImgFile(file);
+            setPostCreateData({...postCreateData, imgFile: file});
         }else {
-            setImgFile(null);
+            setPostCreateData({...postCreateData, imgFile: null});
         }
     }
 
     useEffect(() => {
-        if(imgFile){
+        if(postCreateData.imgFile){
             const reader = new FileReader();
             reader.onloadend = () =>{
-                setPreviewPhoto(reader.result);
-                setImage(reader.result);
+                setPostCreateData({
+                    ...postCreateData,
+                    previewPhoto: reader.result,
+                    image: reader.result
+                })
             }
-            reader.readAsDataURL(imgFile);
+            reader.readAsDataURL(postCreateData.imgFile);
         }else{
-            setPreviewPhoto(preview);
+            setPostCreateData({...postCreateData, previewPhoto: preview})
         }
-    }, [imgFile]);
+    }, [postCreateData.imgFile]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const data = {
             user_Id: +localStorage.getItem('UserId'),
-            title: title,
-            image: image,
-            post_Description: description,
+            title: postCreateData.title,
+            image: postCreateData.image,
+            post_Description: postCreateData.description,
             author: localStorage.getItem('Username')
         };
 
         interestService.createPost(data).then(() => {
-            setSuccess(true);
+            setPostCreateData({...postCreateData, isSuccess: true})
             setTimeout(() => {
-                setSuccess(false);
+                setPostCreateData({...postCreateData, isSuccess: false})
             }, 2000);
         }).catch(() => {
-            setFailed(true);
+            setPostCreateData({...postCreateData, isFailed: true})
             setTimeout(() => {
-                setFailed(false);
+                setPostCreateData({...postCreateData, isFailed: false})
                 }, 2000);
         }).finally(() => {
-            setTitle('');
-            setDescription('');
-            setImage('');
+            setPostCreateData({
+                ...postCreateData,
+                title: '',
+                description: '',
+                image: ''
+            })
         })
     }
 
@@ -77,20 +85,20 @@ function PostCreate(){
                         type="text"
                         name="title"
                         placeholder="Enter post title"
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
+                        value={postCreateData.title}
+                        onChange={e => setPostCreateData({...postCreateData, title: e.target.value})}
                     />
                     <label>Description</label>
                     <textarea name="description"
                               maxLength="200"
                               placeholder="Enter post description..."
-                                value={description}
-                    onChange={e => setDescription(e.target.value)}>
+                                value={postCreateData.description}
+                    onChange={e => setPostCreateData({...postCreateData, description: e.target.value})}>
 
                     </textarea>
                     <label>Image</label>
                     <div className='image-preview'>
-                        <img src={previewPhoto}/>
+                        <img src={postCreateData.previewPhoto}/>
                     </div>
                     <input
                         ref={fileInputRef}
@@ -104,10 +112,10 @@ function PostCreate(){
                     </button>
                 </form>
             </div>
-            <div className={`successful-create ${isSuccess ? "" : "hide"}`}>
+            <div className={`successful-create ${postCreateData.isSuccess ? "" : "hide"}`}>
                 <h1>Post successfully created</h1>
             </div>
-            <div className={`failed-create hide ${isFailed ? "" : "hide"}`}>
+            <div className={`failed-create hide ${postCreateData.isFailed ? "" : "hide"}`}>
                 <h1>Something went wrong</h1>
             </div>
         </div>
