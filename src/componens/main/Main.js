@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import PostCards from "../post/post-cards/PostCards";
 import {Link} from "react-router-dom";
-import InterestService from "../../services/interest-service/InterestService";
+import {getAllPosts} from "../../services/post-service/PostService";
 
 import "./Main.css";
 
@@ -11,13 +11,6 @@ import create from "../../icons/create.svg";
 import spinner from "../../icons/Rolling-1s-200px.svg";
 
 function Main(){
-
-    const interestService = new InterestService();
-    // const [resExist, setResExist] = useState(true);
-    // const [data, setData] = useState(null);
-    // const [filteredData, setFilteredData] = useState(null);
-    // const [searchData, setSearchData] = useState(null);
-    // const [posts, setPosts] = useState(null);
 
     const [mainData, setMainData] = useState({
         resExist: true,
@@ -29,7 +22,7 @@ function Main(){
 
 
     useEffect(() => {
-        interestService.getAllPosts()
+        getAllPosts()
             .then(actualData => {
                 setMainData({
                     ...mainData,
@@ -37,7 +30,7 @@ function Main(){
                     data: actualData
                 })
             })
-    }, []);
+    });
 
     const handleChange = (e) => {
         setMainData({...mainData, searchData: e.target.value.toLowerCase()});

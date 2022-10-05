@@ -1,10 +1,9 @@
 import {useState} from "react";
-import InterestService from "../../../services/interest-service/InterestService";
+import {isUserExistEmail, getUserByEmail} from "../../../services/user-service/UserService";
 import "./Login.css";
 
 function Login(){
 
-    const interestService = new InterestService();
     const [formData, setFormData] = useState({
         email: '',
         password:''
@@ -30,13 +29,13 @@ function Login(){
             let res;
             let userDataObj;
 
-            await interestService.isUserExistEmail(formData.email)
+            await isUserExistEmail(formData.email)
                 .then(actualData => {
                      res = actualData;
                 });
 
             if(res){
-                await interestService.getUserByEmail(formData.email)
+                await getUserByEmail(formData.email)
                     .then(userData => userDataObj = userData[0]);
             }else{
                 setEmailErrorMag(true);

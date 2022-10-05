@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import PostPreview from "../post preview/PostPreview";
-import InterestService from "../../../services/interest-service/InterestService";
+import {getPost} from "../../../services/post-service/PostService";
 
 import "./PostPage.css";
 
@@ -11,8 +11,6 @@ import arrow_back from '../../../icons/arrow-back.svg';
 function PostPage(){
 
     const {postId} = useParams();
-    const interestService = new InterestService();
-
     const [postArr, setPostArr] = useState({
         title: '',
         image: '',
@@ -21,7 +19,7 @@ function PostPage(){
     });
 
     useEffect(() => {
-        interestService.getPost(postId)
+        getPost(postId)
             .then(data => {
                 setPostArr(data)
             })

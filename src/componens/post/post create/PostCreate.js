@@ -1,12 +1,10 @@
 import React, {useEffect, useState, useRef} from 'react';
-import InterestService from "../../../services/interest-service/InterestService";
+import {createPost} from "../../../services/post-service/PostService";
+import {pictureChange, onPreviewChange} from "../../functions/Functions";
 import './PostCreate.css';
-
-import preview from '../../../icons/photo-image-picture.svg'
 
 function PostCreate(){
 
-    const interestService = new InterestService();
     const [postCreateData, setPostCreateData] = useState({
         title: '',
         description: '',
@@ -21,27 +19,12 @@ function PostCreate(){
 
     const onChangePicture = (e) => {
         const file = e.target.files[0];
-        if(file && file.type.substr(0,5) === "image"){
-            setPostCreateData({...postCreateData, imgFile: file});
-        }else {
-            setPostCreateData({...postCreateData, imgFile: null});
-        }
+        pictureChange(file, setPostCreateData, postCreateData);
     }
 
+
     useEffect(() => {
-        if(postCreateData.imgFile){
-            const reader = new FileReader();
-            reader.onloadend = () =>{
-                setPostCreateData({
-                    ...postCreateData,
-                    previewPhoto: reader.result,
-                    image: reader.result
-                })
-            }
-            reader.readAsDataURL(postCreateData.imgFile);
-        }else{
-            setPostCreateData({...postCreateData, previewPhoto: preview})
-        }
+        onPreviewChange(setPostCreateData, postCreateData, postCreateData.imgFile);
     }, [postCreateData.imgFile]);
 
     const handleSubmit = (e) => {
@@ -55,7 +38,7 @@ function PostCreate(){
             author: localStorage.getItem('Username')
         };
 
-        interestService.createPost(data).then(() => {
+        createPost(data).then(() => {
             setPostCreateData({...postCreateData, isSuccess: true})
             setTimeout(() => {
                 setPostCreateData({...postCreateData, isSuccess: false})

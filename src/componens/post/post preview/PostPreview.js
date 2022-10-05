@@ -1,34 +1,25 @@
 import React, {useState, useEffect} from "react";
 import CommentList from "../../comment-list/CommentList";
+import {pictureChange, onPreviewChange} from "../../functions/Functions";
+import {deletePost, updatePost} from "../../../services/post-service/PostService";
 import './PostPreview.css';
-
-import preview from "../../../icons/photo-image-picture.svg";
 
 function PostPreview({postData}){
 
-    const url = `https://localhost:5001/api/Post/${postData.id}`;
-    const [editForm, setEditForm] = useState(false);
-
-    const [title, setTitle] = useState(postData.title);
-    const [description, setDescription] = useState(postData.post_Description);
-    const [image, setImage] = useState(postData.image);
-
-    const [imgFile, setImgFile] = useState('');
-    const [previewPhoto, setPreviewPhoto] = useState(postData.image);
+    const [postPreviewData, setPostPreviewData] = useState({
+        editForm: false,
+        title: postData.title,
+        description: postData.description,
+        image: postData.image,
+        previewPhoto: postData.image,
+        imgFile: ''
+    })
 
     const deleteItem = (e) => {
         e.preventDefault();
-
         let confimDelete = window.confirm("Are you sure you want to delete this post?");
         if(confimDelete){
-            fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(() => {
-                window.location.replace('/');
-            })
+            deletePost(postData.id).then(() => window.location.replace('/'));
         }
 
     }
@@ -38,20 +29,13 @@ function PostPreview({postData}){
         const data = {
             id: postData.id,
             user_Id: +localStorage.getItem('UserId'),
-            title: title,
-            image: image,
-            post_Description: description,
+            title: postPreviewData.title,
+            image: postPreviewData.image,
+            post_Description: postPreviewData.description,
             author: localStorage.getItem("Username")
         }
 
-        fetch("https://localhost:5001/api/Post",
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(() => {
+        updatePost(data).then(() => {
                 window.location.reload();
         })
 
@@ -59,61 +43,56 @@ function PostPreview({postData}){
 
     const editItem = (e) => {
         e.preventDefault();
-        setEditForm(true);
+        setPostPreviewData({...postPreviewData, editForm: true});
     }
 
     const hideEditForm = (e) => {
         e.preventDefault();
-        setEditForm(false);
+        setPostPreviewData({...postPreviewData, editForm: false});
     }
 
     const onChangePicture = (e) => {
         const file = e.target.files[0];
-        if(file && file.type.substr(0,5) === "image"){
-            setImgFile(file);
-        }else {
-            setImgFile(null);
-        }
+        pictureChange(file, setPostPreviewData, postPreviewData);
     }
 
     useEffect(() => {
-        if(imgFile){
-            const reader = new FileReader();
-            reader.onloadend = () =>{
-                setPreviewPhoto(reader.result);
-                setImage(reader.result);
-            }
-            reader.readAsDataURL(imgFile);
-        }else{
-            setPreviewPhoto(preview);
-        }
-    }, [imgFile]);
+        onPreviewChange(setPostPreviewData, postPreviewData, postPreviewData.imgFile)
+    }, [postPreviewData.imgFile]);
 
     return(
         <>
             <div className='post-preview'>
-                <div className={`blur ${editForm ? '' : 'hide'}`} onClick={hideEditForm}></div>
-                <div className={`update-post-form ${editForm ? '' : 'hide'}`}>
+                <div className={`blur ${postPreviewData.editForm ? '' : 'hide'}`} onClick={hideEditForm}></div>
+                <div className={`update-post-form ${postPreviewData.editForm ? '' : 'hide'}`}>
                     <form onSubmit={confimUpdate}>
                         <label>Title</label>
                         <input
                             type="text"
                             name="title"
                             placeholder="Enter post title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            value={postPreviewData.title}
+                            onChange={(e) => setPostPreviewData(
+                                {
+                                    ...postPreviewData,
+                                    title: e.target.value
+                                })}
                         />
                         <label>Description</label>
                         <textarea
                             name="description"
                             maxLength="200"
                             placeholder="Enter post description..."
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            value={postPreviewData.description}
+                            onChange={(e) => setPostPreviewData(
+                                {
+                                    ...postPreviewData,
+                                    description: e.target.value
+                                })}
                         />
                         <label>Image</label>
                         <div className='update-post-preview'>
-                            <img alt='preview' src={previewPhoto}/>
+                            <img alt='preview' src={postPreviewData.previewPhoto}/>
                         </div>
                         <input
                             className='file-input'

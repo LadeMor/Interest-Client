@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
-import InterestService from "../../../services/interest-service/InterestService";
+import {isUserExistUsername, isUserExistEmail, addUser} from "../../../services/user-service/UserService";
 
 import "./Register.css";
 
 
 function Register(){
 
-    const interestService = new InterestService();
     const [userData, setUserData] = useState({
         username: '',
         description: '',
@@ -22,7 +21,7 @@ function Register(){
         let passwordIsCorrect = false;
 
         if(userDb.username.trim() !== ''){
-            await interestService.isUserExistUsername(userDb.username).then(res => {
+            await isUserExistUsername(userDb.username).then(res => {
                 if(res){
                     usernameIsCorrect = false;
                     console.log('This username is exist!');
@@ -36,7 +35,7 @@ function Register(){
         }
 
         if(userDb.email.trim() !== ''){
-            await interestService.isUserExistEmail(userDb.email).then(res => {
+            await isUserExistEmail(userDb.email).then(res => {
                 if(res){
                     emailIsCorrect = false;
                     console.log('This email is exist!');
@@ -72,7 +71,7 @@ function Register(){
 
         validateUserData(userData).then(function(result){
             if(result){
-               interestService.addUser(data)
+               addUser(data)
                    .then(() => console.log('Success'))
                    .catch(() => console.log('Error'))
             }
