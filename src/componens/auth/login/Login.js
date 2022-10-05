@@ -5,7 +5,7 @@ import "./Login.css";
 function Login(){
 
     const interestService = new InterestService();
-    const [formData, setFromData] = useState({
+    const [formData, setFormData] = useState({
         email: '',
         password:''
     });
@@ -82,7 +82,7 @@ function Login(){
                             className={`email-input ${emailErrorMsg ? 'wrong-data' : ''}`}
                             type="email"
                             name="email"
-                            onChange={e => setFromData({
+                            onChange={e => setFormData({
                                 ...formData,
                                 email: e.target.value
                             })}
