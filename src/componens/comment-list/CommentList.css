@@ -17,3 +17,30 @@
 .comment-list ul{
     list-style-type: none;
 }
+.comment-list form input{
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 650px;
+    height: 30px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 10px;
+    border:#c3c3c3 1px solid;
+}
+
+.comment-list form button{
+    margin-left: 10px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    border: 1px #6633FF solid;
+    width: 70px;
+    color: white;
+    background-color: #6633FF;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.comment-list form button:hover{
+    background-color: #4324a6;
+}

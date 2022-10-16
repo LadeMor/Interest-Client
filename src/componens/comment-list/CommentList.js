@@ -43,6 +43,13 @@ function CommentList() {
 
         <div className="comment-list">
             <h1>Comments</h1>
+            <form>
+                <span>
+                    <input placeholder="comment..." type="text"/>
+                    <button type="submit">Submit</button>
+                </span>
+
+            </form>
             <ul>
                 {commentsList.map(item => <CommentListItem data={item}/>)}
             </ul>
