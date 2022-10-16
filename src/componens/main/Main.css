@@ -56,6 +56,14 @@
     border-radius: 20px;
 }
 
+.content-block-tools h1{
+    padding: 10px;
+}
+
+.content-block-tools select{
+    width:200px;
+}
+
 .content-block-tools ul{
     list-style-type: none;
 }

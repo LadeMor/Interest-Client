@@ -17,7 +17,8 @@ function Main(){
         data: null,
         filteredData: null,
         searchData: '',
-        posts: null
+        posts: null,
+        sort: 'none'
     })
 
 
@@ -30,7 +31,37 @@ function Main(){
                     data: actualData
                 })
             })
-    });
+    }, []);
+
+    useEffect(() => {
+        switch (mainData.sort) {
+            case 'none':
+                setMainData({...mainData, data: mainData.posts});
+                break;
+            case 'alph':
+                setMainData({...mainData, data: mainData.posts.sort((a, b) => {
+                        if(a.title > b.title){
+                            return 1;
+                        }
+                        if(a.title < b.title){
+                            return -1;
+                        }
+                        return 0;
+                    })});
+                break;
+            case 'date':
+                setMainData({...mainData, data: mainData.posts.sort((a, b) => {
+                        if(a.date_Of_Creation > b.date_Of_Creation){
+                            return 1;
+                        }
+                        if(a.date_Of_Creation < b.date_Of_Creation){
+                            return -1;
+                        }
+                        return 0;
+                    })});
+                break;
+        }
+    }, [mainData.sort]);
 
     const handleChange = (e) => {
         setMainData({...mainData, searchData: e.target.value.toLowerCase()});
@@ -50,15 +81,15 @@ function Main(){
         } else{
             setMainData({
                 ...mainData,
-                data: mainData.posts
-                .filter(post => post
-                    .title
-                    .toLowerCase()
-                    .includes(mainData.searchData)),
+                data: mainData.posts.filter(post => post.title.toLowerCase().includes(mainData.searchData)),
                 resExist: true
             });
         }
     };
+
+    const selectChange = (e) => {
+        setMainData({...mainData, sort: e.target.value});
+    }
 
     return(
         <div>
@@ -66,10 +97,12 @@ function Main(){
                 <h1>Tools</h1>
                 <ul>
                     <li>
-                        <img src={filter} alt='filter'/>
-                    </li>
-                    <li>
-                        <img src={sort} alt='sort'/>
+                        <h3>Sort by:</h3>
+                        <select onChange={selectChange}>
+                            <option value="none">None</option>
+                            <option value="date">Date</option>
+                            <option value="alph">A-Z</option>
+                        </select>
                     </li>
                 </ul>
             </div>
@@ -78,7 +111,7 @@ function Main(){
                     <img src={create} alt='create-post'/>
                 </div>
             </Link> :
-            ''}
+            null}
             <div className="content-block">
                 <div className="search-from">
                     <form onSubmit={handleSubmit}>

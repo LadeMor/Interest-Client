@@ -8,16 +8,23 @@
 .form-block-register{
     margin: 0 auto;
     margin-top: 50px;
-    height: 700px;
     width: 700px;
     border-radius: 3px;
     border:#c3c3c3 1px solid;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
 
     -webkit-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
 }
 
+.image-preview{
+    margin-left: 20px;
+    height: 300px;
+    width: 300px;
+    border: 1px solid #EFEFEF;
+}
 
 .form-block-register form input{
     outline:none;

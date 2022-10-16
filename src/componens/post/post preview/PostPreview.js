@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import CommentList from "../../comment-list/CommentList";
 import {pictureChange, onPreviewChange} from "../../functions/Functions";
 import {deletePost, updatePost} from "../../../services/post-service/PostService";
+import Moment from 'react-moment';
 import './PostPreview.css';
 
 function PostPreview({postData}){
@@ -108,6 +109,9 @@ function PostPreview({postData}){
                 <h1>{postData.title}</h1>
                 <img src={`${postData.image}`} alt='post'/>
                 <p>{postData.post_Description}</p>
+                <p>
+                    Uploaded: <Moment format="YYYY-MM-DD">{postData.date_Of_Creation}</Moment>
+                </p>
                 {+localStorage.getItem('UserId') === postData.user_Id || +localStorage.getItem('UserRoleId') === 1?
                     <div className='post-page-buttons'>
                         <button className='post-page-edit-button' onClick={editItem}>Edit</button>

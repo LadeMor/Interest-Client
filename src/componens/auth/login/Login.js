@@ -20,6 +20,7 @@ function Login(){
         localStorage.setItem('UserEmail', data.email);
         localStorage.setItem('UserDescription', data.description);
         localStorage.setItem('UserRoleId', data.roleId);
+        localStorage.setItem('UserProfilePhoto', data.profile_Photo);
     }
 
     async function validateLoginData(){

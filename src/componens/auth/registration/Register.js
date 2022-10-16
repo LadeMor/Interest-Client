@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {isUserExistUsername, isUserExistEmail, addUser} from "../../../services/user-service/UserService";
-
+import {pictureChange, onPreviewChange} from "../../functions/Functions";
 import "./Register.css";
 
 
@@ -11,8 +11,18 @@ function Register(){
         description: '',
         email: '',
         password: '',
-        profilePhoto: ''
+        profilePhoto: '',
+        previewPhoto: ''
     });
+
+    const onChangePicture = (e) => {
+        const file = e.target.files[0];
+        pictureChange(file, setUserData, userData);
+    }
+
+    useEffect(() => {
+        onPreviewChange(setUserData, userData, userData.imgFile);
+    }, [userData.imgFile]);
 
     async function validateUserData(userDb){
 
@@ -66,7 +76,8 @@ function Register(){
             password: userData.password,
             email: userData.email,
             description: userData.description,
-            roleId:2
+            roleId:2,
+            profile_Photo: userData.profilePhoto
         };
 
         validateUserData(userData).then(function(result){
@@ -121,13 +132,14 @@ function Register(){
                         })}
                     />
                     <label>Profile photo</label>
+                    <div className='image-preview'>
+                        <img src={userData.previewPhoto}/>
+                    </div>
                     <input
-                        type="text"
+                        type="file"
                         name="profilpic"
-                        onChange={e => setUserData({
-                            ...userData,
-                            profilePhoto: e.target.value
-                        })}
+                        accept="image/*"
+                        onChange={onChangePicture}
                     />
                     <button type="submit">
                         Submit
