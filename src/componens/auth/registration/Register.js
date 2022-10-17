@@ -11,7 +11,7 @@ function Register(){
         description: '',
         email: '',
         password: '',
-        profilePhoto: '',
+        image: '',
         previewPhoto: ''
     });
 
@@ -77,7 +77,7 @@ function Register(){
             email: userData.email,
             description: userData.description,
             roleId:2,
-            profile_Photo: userData.profilePhoto
+            profile_Photo: userData.image
         };
 
         validateUserData(userData).then(function(result){

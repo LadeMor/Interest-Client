@@ -7,6 +7,11 @@ export const getAllUsers = async () => {
     return res;
 }
 
+export const getUserById = async (id) => {
+    const res = await getResource(`${_apiBaseUser}/${id}`);
+    return res;
+}
+
 export const getUserByEmail = async (email) => {
     const res = await getResource(`${_apiBaseUser}/${email}/userbyemail`);
     return res;

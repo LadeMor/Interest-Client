@@ -3,6 +3,12 @@
     margin-top:10px;
     border-radius: 10px;
     text-align: left;
+    transition: .3s;
+}
+.user-list-item:hover{
+    -webkit-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
 }
 .user-list-item button{
     display: inline;
@@ -12,4 +18,8 @@
 
 .user-email{
     margin-left: 20px;
+}
+
+.user-list-item a{
+    text-decoration: none;
 }

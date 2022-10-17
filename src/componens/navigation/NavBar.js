@@ -15,6 +15,7 @@ import Login from "../auth/login/Login";
 import PostPage from "../post/post page/PostPage";
 import PostCreate from "../post/post create/PostCreate";
 import AdminPage from "../admin/AdminPage";
+import UserPageItem from "../admin/user-page-item/UserPageItem";
 
 function NavBar(){
 
@@ -78,6 +79,7 @@ function NavBar(){
                     <Route path="/post/:postId" element={<PostPage/>}/>
                     <Route path="/post_create" element={<PostCreate/>}/>
                     <Route path="/admin" element={<AdminPage/>}/>
+                    <Route path="/admin/userpage/:userId" element={<UserPageItem/>}/>
                 </Routes>
             </Router>
         </div>

@@ -36,7 +36,17 @@ function Main(){
     useEffect(() => {
         switch (mainData.sort) {
             case 'none':
-                setMainData({...mainData, data: mainData.posts});
+                if(mainData.posts){
+                    setMainData({...mainData, data: mainData.posts.sort((a, b) => {
+                            if(a.date_Of_Creation > b.date_Of_Creation){
+                                return 1;
+                            }
+                            if(a.date_Of_Creation < b.date_Of_Creation){
+                                return -1;
+                            }
+                            return 0;
+                        })});
+                }
                 break;
             case 'alph':
                 setMainData({...mainData, data: mainData.posts.sort((a, b) => {
@@ -51,10 +61,10 @@ function Main(){
                 break;
             case 'date':
                 setMainData({...mainData, data: mainData.posts.sort((a, b) => {
-                        if(a.date_Of_Creation > b.date_Of_Creation){
+                        if(a.date_Of_Creation < b.date_Of_Creation){
                             return 1;
                         }
-                        if(a.date_Of_Creation < b.date_Of_Creation){
+                        if(a.date_Of_Creation > b.date_Of_Creation){
                             return -1;
                         }
                         return 0;

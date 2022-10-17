@@ -13,7 +13,8 @@ function PostPreview({postData}){
         description: postData.description,
         image: postData.image,
         previewPhoto: postData.image,
-        imgFile: ''
+        imgFile: '',
+        dateOfCreation: postData.date_Of_Creation
     })
 
     const deleteItem = (e) => {
@@ -33,7 +34,8 @@ function PostPreview({postData}){
             title: postPreviewData.title,
             image: postPreviewData.image,
             post_Description: postPreviewData.description,
-            author: localStorage.getItem("Username")
+            author: localStorage.getItem("Username"),
+            date_Of_Creation: postData.date_Of_Creation
         }
 
         updatePost(data).then(() => {
