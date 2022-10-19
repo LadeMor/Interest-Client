@@ -6,7 +6,7 @@
     text-align: center;
 }
 
-.user-info img  {
+#avatar  {
     margin: auto;
     width: 150px;
     height: 150px;
@@ -37,4 +37,9 @@
     margin: 0 auto;
     margin-bottom: 20px;
     width: 300px;
+}
+
+user-page-cards{
+    margin: 0 auto;
+    display: block;
 }

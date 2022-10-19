@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getUserById} from "../../../services/user-service/UserService";
+import nouser from "../../../img/no-user-photo-placeholder.png";
+import './UserPageItem.css';
 
 function UserPageItem(){
 
@@ -29,23 +31,25 @@ function UserPageItem(){
         });
     })
 
-    const userInfoBlock =
+    const userInfoBlock =(
             <>
-                <div>
-                    <h1>{userPageData.username}</h1>
-                    <h1>{userPageData.description}</h1>
-                    <h1>{userPageData.email}</h1>
-                    <h1>{userPageData.roleId}</h1>
-                    <img
-                        src={`${typeof(userPageData.profilePhoto) === 'undefined' ? null : userPageData.profilePhoto }`}
-                        alt={`profile photo of user: ${userPageData.username}`}
-                        style={{maxWidth:"400px", maxHeight:"700px"}}/>
-                </div>
+                <img
+                    src={(userPageData.profilePhoto)}
+                    alt={`profile photo of user: ${userPageData.username}`}
+                    style={{maxWidth:"400px", maxHeight:"700px"}}/>
+                <ul>
+                    <li>{userPageData.username}</li>
+                    <li>{userPageData.description}</li>
+                    <li>{userPageData.email}</li>
+                    <li>{userPageData.roleId}</li>
+                </ul>
             </>
+    );
 
     return(
-        <div>
+        <div className="user-page-item-block">
             {userInfoBlock}
+            <button>Ban</button>
         </div>
     )
 }
