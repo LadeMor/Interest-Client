@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useNavigate} from "react-router-dom";
 import PostPreview from "../post preview/PostPreview";
 import {getPost} from "../../../services/post-service/PostService";
 
@@ -10,6 +10,7 @@ import arrow_back from '../../../icons/arrow-back.svg';
 
 function PostPage(){
 
+    const navigate = useNavigate();
     const {postId} = useParams();
     const [postArr, setPostArr] = useState({
         title: '',
@@ -27,11 +28,9 @@ function PostPage(){
 
     return(
         <div>
-            <Link to="/">
-                <div className='back_arrow_block'>
-                    <img src={arrow_back}/>
-                </div>
-            </Link>
+            <div className='back_arrow_block' onClick={() => navigate(-1)}>
+                <img src={arrow_back}/>
+            </div>
             <div className='preview-content'>
                 {(typeof(postArr[0]) === 'undefined' ?
                         "Loading" :

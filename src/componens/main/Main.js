@@ -5,8 +5,6 @@ import {getAllPosts} from "../../services/post-service/PostService";
 
 import "./Main.css";
 
-import filter from "../../icons/filter.svg";
-import sort from "../../icons/sort.svg";
 import create from "../../icons/create.svg";
 import spinner from "../../icons/Rolling-1s-200px.svg";
 

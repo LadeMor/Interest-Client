@@ -77,6 +77,7 @@ function NavBar(){
                     <Route path="/registration" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/post/:postId" element={<PostPage/>}/>
+                    <Route path="/user/post/:postId" element={<PostPage/>}/>
                     <Route path="/post_create" element={<PostCreate/>}/>
                     <Route path="/admin" element={<AdminPage/>}/>
                     <Route path="/admin/userpage/:userId" element={<UserPageItem/>}/>
