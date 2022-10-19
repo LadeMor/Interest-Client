@@ -3,18 +3,21 @@ import {useParams} from "react-router-dom";
 import {getUserById} from "../../../services/user-service/UserService";
 import nouser from "../../../img/no-user-photo-placeholder.png";
 import './UserPageItem.css';
+import {getAllPosts} from "../../../services/post-service/PostService";
+import PostCards from "../../post/post-cards/PostCards";
 
 function UserPageItem(){
 
     const [userPageData, setUserPageData] = useState({
-        id:null,
+        id: null,
         username: '',
         description: '',
         email: '',
         roleId: '',
-        password:'',
+        password: '',
         profilePhoto: ''
     });
+    const [userPosts, setUserPosts] = useState(null);
     const {userId} = useParams();
 
     useEffect(() => {
@@ -31,6 +34,25 @@ function UserPageItem(){
         });
     })
 
+    useEffect(() => {
+        getAllPosts().then(res => {
+            if(userPosts === null && userPageData !== null){
+                setUserPosts(res.filter(post => post.user_Id === userPageData.id));
+            }
+        })
+    })
+
+    const roleCheck = (roleId) => {
+        switch (roleId){
+            case 1:
+                return "Admin";
+                break;
+            case 2:
+                return "User";
+                break;
+        }
+    }
+
     const userInfoBlock =(
             <>
                 <img
@@ -41,7 +63,7 @@ function UserPageItem(){
                     <li>{userPageData.username}</li>
                     <li>{userPageData.description}</li>
                     <li>{userPageData.email}</li>
-                    <li>{userPageData.roleId}</li>
+                    <li>{roleCheck(userPageData.roleId)}</li>
                 </ul>
             </>
     );
@@ -50,6 +72,7 @@ function UserPageItem(){
         <div className="user-page-item-block">
             {userInfoBlock}
             <button>Ban</button>
+            <PostCards post={userPosts}/>
         </div>
     )
 }
