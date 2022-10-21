@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import CommentListItem from "../comment-list-item/CommentListItem";
 
 import "./CommentList.css";
 
-function CommentList() {
+function CommentList({comments}) {
+
 
     const [commentsList, setCommentsList] = useState([
         {
@@ -50,9 +51,7 @@ function CommentList() {
                 </span>
 
             </form>
-            <ul>
-                {commentsList.map(item => <CommentListItem data={item}/>)}
-            </ul>
+            {comments ? comments.map(item => <CommentListItem data={item}/>) : null}
         </div>
     );
 }

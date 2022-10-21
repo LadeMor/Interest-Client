@@ -5,9 +5,10 @@
     margin-left: -20px;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding: 10px;
 }
 
-.comment-list-item h4, p{
+.comment-list-item h3, p, h6{
     margin: 5px;
 }
 

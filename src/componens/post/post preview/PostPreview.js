@@ -4,6 +4,7 @@ import {pictureChange, onPreviewChange} from "../../functions/Functions";
 import {deletePost, updatePost} from "../../../services/post-service/PostService";
 import Moment from 'react-moment';
 import './PostPreview.css';
+import {getCommentsByPostId} from "../../../services/comment-service/CommentService";
 
 function PostPreview({postData}){
 
@@ -14,7 +15,19 @@ function PostPreview({postData}){
         image: postData.image,
         previewPhoto: postData.image,
         imgFile: '',
-        dateOfCreation: postData.date_Of_Creation
+        dateOfCreation: postData.date_Of_Creation,
+        comments: null
+    })
+
+    useEffect(() => {
+        if(postData){
+            getCommentsByPostId(postData.id).then(res => {
+                if(postPreviewData.comments === null){
+                    setPostPreviewData({...postPreviewData, comments: res});
+
+                }
+            });
+        }
     })
 
     const deleteItem = (e) => {
@@ -122,7 +135,7 @@ function PostPreview({postData}){
                     ''
                 }
             </div>
-            <CommentList/>
+            <CommentList comments={postPreviewData.comments ? postPreviewData.comments :  null}/>
         </>
     );
 }

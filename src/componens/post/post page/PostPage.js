@@ -12,19 +12,16 @@ function PostPage(){
 
     const navigate = useNavigate();
     const {postId} = useParams();
-    const [postArr, setPostArr] = useState({
-        title: '',
-        image: '',
-        description: '',
-        author: ''
-    });
+    const [postArr, setPostArr] = useState(null);
 
     useEffect(() => {
-        getPost(postId)
-            .then(data => {
-                setPostArr(data)
-            })
-    }, []);
+        if(postArr === null){
+            getPost(postId)
+                .then(data => {
+                    setPostArr(data)
+                })
+        }
+    }, [postArr]);
 
     return(
         <div>
@@ -32,7 +29,7 @@ function PostPage(){
                 <img src={arrow_back}/>
             </div>
             <div className='preview-content'>
-                {(typeof(postArr[0]) === 'undefined' ?
+                {(postArr === undefined || postArr === null || postArr === [] ?
                         "Loading" :
                         <PostPreview postData={postArr[0]}/>
                 )}
