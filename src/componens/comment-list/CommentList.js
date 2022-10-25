@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {createComment} from "../../services/comment-service/CommentService";
 import CommentListItem from "../comment-list-item/CommentListItem";
-import InputEmoji from 'react-input-emoji'
 
 import "./CommentList.css";
 function CommentList({comments, postData}) {
@@ -35,9 +34,6 @@ function CommentList({comments, postData}) {
                 <span>
                     <input placeholder="comment..." type="text" name="comment_input" onChange={handleChange}/>
                     <button type="submit">Submit</button>
-                    <div className="emoji-picker">
-                        <InputEmoji/>
-                    </div>
                 </span>
             </form> : null}
             {comments ? comments.map(item => <CommentListItem data={item}/>) : null}
