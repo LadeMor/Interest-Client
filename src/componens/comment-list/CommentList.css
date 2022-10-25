@@ -44,3 +44,7 @@
 .comment-list form button:hover{
     background-color: #4324a6;
 }
+
+.emoji-picker{
+    margin-left: 20px;
+}

@@ -25,8 +25,10 @@ function PostPage(){
 
     return(
         <div>
-            <div className='back_arrow_block' onClick={() => navigate(-1)}>
-                <img src={arrow_back}/>
+            <div className='back_arrow_block'>
+                <Link to="/">
+                    <img src={arrow_back}/>
+                </Link>
             </div>
             <div className='preview-content'>
                 {(postArr === undefined || postArr === null || postArr === [] ?

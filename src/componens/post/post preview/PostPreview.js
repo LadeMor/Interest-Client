@@ -10,6 +10,7 @@ function PostPreview({postData}){
 
     const [postPreviewData, setPostPreviewData] = useState({
         editForm: false,
+        postId: postData.id,
         title: postData.title,
         description: postData.description,
         image: postData.image,
@@ -135,7 +136,7 @@ function PostPreview({postData}){
                     ''
                 }
             </div>
-            <CommentList comments={postPreviewData.comments ? postPreviewData.comments :  null}/>
+            <CommentList comments={postPreviewData.comments ? postPreviewData.comments :  null} postData = {postPreviewData ? postPreviewData : null}/>
         </>
     );
 }
