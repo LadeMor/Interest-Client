@@ -1,4 +1,4 @@
-import {getResource, postResource} from "../interest-service/InterestService";
+import {getResource, postResource, updateResouce} from "../interest-service/InterestService";
 
 const _apiBaseUser = 'https://localhost:5001/api/User';
 
@@ -29,5 +29,10 @@ export const isUserExistEmail = async (email) => {
 
 export const addUser = async (data) => {
     const res = await postResource(_apiBaseUser, data);
+    return res;
+}
+
+export const updateUser = async (data) => {
+    const res = await updateResouce(_apiBaseUser, data);
     return res;
 }

@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 
 import "./UserPage.css";
 import {Link} from "react-router-dom";
-import {getAllPosts} from "../../services/post-service/PostService";
-import PostCards from "../post/post-cards/PostCards";
+import {getAllPosts} from "../../../services/post-service/PostService";
+import PostCards from "../../post/post-cards/PostCards";
 
 function UserPage(){
 
@@ -41,7 +41,10 @@ function UserPage(){
                         </p>
                     </div>
                     <Link to="/post_create">
-                        <button>Create post +</button>
+                        <button>Create post</button>
+                    </Link>
+                    <Link to="/user/useredit">
+                        <button>Edit profile</button>
                     </Link>
                     <div className="user-page-cards">
                         <PostCards post={user.posts}/>

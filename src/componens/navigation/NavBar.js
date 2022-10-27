@@ -9,13 +9,14 @@ import {
 import "./NavBar.css";
 
 import Main from "../main/Main";
-import UserPage from "../user/UserPage";
+import UserPage from "../user/user-page/UserPage";
 import Register from "../auth/registration/Register";
 import Login from "../auth/login/Login";
 import PostPage from "../post/post page/PostPage";
 import PostCreate from "../post/post create/PostCreate";
 import AdminPage from "../admin/AdminPage";
 import UserPageItem from "../admin/user-page-item/UserPageItem";
+import UserEdit from "../user/user-edit/UserEdit";
 
 function NavBar(){
 
@@ -82,6 +83,7 @@ function NavBar(){
                     <Route path="/post_create" element={<PostCreate/>}/>
                     <Route path="/admin" element={<AdminPage/>}/>
                     <Route path="/admin/userpage/:userId" element={<UserPageItem/>}/>
+                    <Route path="/user/useredit" element={<UserEdit/>}/>
                 </Routes>
             </Router>
         </div>

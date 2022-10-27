@@ -1,0 +1,73 @@
+.form-block-user-edit{
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 700px;
+    border-radius: 3px;
+    border:#c3c3c3 1px solid;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+
+    -webkit-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
+}
+
+.image-preview{
+    margin-left: 20px;
+    height: 300px;
+    width: 300px;
+    border: 1px solid #EFEFEF;
+}
+
+.form-block-user-edit form input{
+    outline:none;
+    width: 500px;
+    height: 30px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    display: block;
+    border: none;
+    border-bottom: 2px solid #EFEFEF;
+    font-size: 15px;
+}
+
+.form-block-user-edit form textarea{
+    width: 300px;
+    height: 100px;
+    resize: none;
+    font-size: 15px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    display: block;
+    outline:none;
+    border: 2px solid #EFEFEF;
+}
+
+.form-block-user-edit form label{
+    margin-left: 20px;
+}
+
+.form-block-user-edit form button{
+    border: #EFEFEF;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    font-size: 15px;
+    width: 100px;
+    height: 50px;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+.form-block-user-edit form button:hover{
+    border: #3f3f3f;
+    background-color: #3f3f3f;
+    color: #EFEFEF;
+}
+
+.form-block-user-edit h1{
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
