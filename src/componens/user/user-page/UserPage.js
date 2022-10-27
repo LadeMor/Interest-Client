@@ -43,9 +43,9 @@ function UserPage(){
                     <Link to="/post_create">
                         <button>Create post</button>
                     </Link>
-                    <Link to="/user/useredit">
-                        <button>Edit profile</button>
-                    </Link>
+                    {/*<Link to="/user/useredit">*/}
+                    {/*    <button>Edit profile</button>*/}
+                    {/*</Link>*/}
                     <div className="user-page-cards">
                         <PostCards post={user.posts}/>
                     </div>

@@ -22,7 +22,7 @@ function CommentListItem({data}){
                     <h6>{data.date_Of_Comment_Creation}</h6>
                 </Moment>
                 <p>{data.text}</p>
-                { data.user_Comment_Id === +localStorage.getItem("UserId") ? <img src={trashicon} width="40px" height="40px" onClick={handleClick}/> : null}
+                { data.user_Comment_Id === +localStorage.getItem("UserId") || +localStorage.getItem("UserRoleId") === 1 ? <img src={trashicon} width="40px" height="40px" onClick={handleClick}/> : null}
             </li>
         </ul>
 

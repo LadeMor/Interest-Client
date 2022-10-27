@@ -71,7 +71,6 @@ function UserPageItem(){
     return(
         <div className="user-page-item-block">
             {userInfoBlock}
-            <button>Ban</button>
             <PostCards post={userPosts}/>
         </div>
     )
