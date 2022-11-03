@@ -125,6 +125,7 @@ function PostPreview({postData}){
                 <h1>{postData.title}</h1>
                 <img src={`${postData.image}`} alt='post'/>
                 <p>{postData.post_Description}</p>
+                <p>By: <strong>{postData.author}</strong></p>
                 <p>
                     Uploaded: <Moment format="YYYY-MM-DD">{postData.date_Of_Creation}</Moment>
                 </p>

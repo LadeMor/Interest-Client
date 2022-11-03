@@ -32,7 +32,7 @@ function NavBar(){
             localStorage.setItem('UserEmail', '');
             localStorage.setItem('UserDescription', '');
             localStorage.setItem('UserRoleId', '');
-            window.location.reload()
+            window.location.replace("/");
         }
 
     };
@@ -46,9 +46,9 @@ function NavBar(){
                             <li>
                                 <Link to="/">Interest</Link>
                             </li>
-                            <li>
+                            { localStorage.getItem("isUserLogin") === "true" ? <li>
                                 <Link to="/user">My page</Link>
-                            </li>
+                            </li> : null}
                             <li>
                                 <Link to="/registration">Registration</Link>
                             </li>

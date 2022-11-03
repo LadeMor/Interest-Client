@@ -9,7 +9,7 @@
     box-shadow: 10px 10px 16px -6px rgba(0,0,0,0.75);
 }
 
-.post-preview h1{
+.post-preview h1, h3{
     margin-left: 20px;
     margin-top: 20px;
     margin-right: 20px;
