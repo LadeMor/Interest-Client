@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {createComment} from "../../services/comment-service/CommentService";
 import CommentListItem from "../comment-list-item/CommentListItem";
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 
 
-import "./CommentList.css";
+
+
 function CommentList({comments, postData}) {
 
     const [commentText, setCommentText] = useState(null);
@@ -29,16 +35,30 @@ function CommentList({comments, postData}) {
     }
 
     return(
-        <div className="comment-list">
-            <h1>Comments</h1>
+        <Container>
+            <Box sx={
+                {width: '100%',
+                    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",
+                marginBottom: 3,
+                marginTop: 3,
+                borderRadius:1,
+                p:1}}>
+            <Typography variant="h3" gutterBottom>
+                Comments
+            </Typography>
             { localStorage.getItem("isUserLogin") === 'true' ? <form onSubmit={handleSubmit}>
-                <span>
-                    <input placeholder="comment..." type="text" name="comment_input" onChange={handleChange}/>
-                    <button type="submit">Submit</button>
-                </span>
+                <Box
+                    sx={{
+                        '& .MuiTextField-root': { marginRight: 1, marginBottom: 1, marginLeft: 1,height: '5ch',width: '60ch' },
+                        '& .MuiButton-root': { width: '10ch', marginBottom: 1, height:'7ch' }
+                    }}>
+                    <TextField placeholder="comment..." type="text" onChange={handleChange}/>
+                    <Button variant="contained" type="submit">Submit</Button>
+                </Box>
             </form> : null}
-            {comments ? comments.map(item => <CommentListItem data={item}/>) : null}
-        </div>
+            {comments ? <CommentListItem data={comments}/> : null}
+            </Box>
+        </Container>
     );
 }
 

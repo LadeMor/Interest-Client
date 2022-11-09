@@ -3,8 +3,17 @@ import CommentList from "../../comment-list/CommentList";
 import {pictureChange, onPreviewChange} from "../../functions/Functions";
 import {deletePost, updatePost} from "../../../services/post-service/PostService";
 import Moment from 'react-moment';
-import './PostPreview.css';
 import {getCommentsByPostId} from "../../../services/comment-service/CommentService";
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 function PostPreview({postData}){
 
@@ -19,6 +28,21 @@ function PostPreview({postData}){
         dateOfCreation: postData.date_Of_Creation,
         comments: null
     })
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     useEffect(() => {
         if(postData){
@@ -79,65 +103,107 @@ function PostPreview({postData}){
 
     return(
         <>
-            <div className='post-preview'>
-                <div className={`blur ${postPreviewData.editForm ? '' : 'hide'}`} onClick={hideEditForm}></div>
-                <div className={`update-post-form ${postPreviewData.editForm ? '' : 'hide'}`}>
-                    <form onSubmit={confimUpdate}>
-                        <label>Title</label>
-                        <input
-                            type="text"
-                            name="title"
-                            placeholder="Enter post title"
-                            value={postPreviewData.title}
-                            onChange={(e) => setPostPreviewData(
-                                {
-                                    ...postPreviewData,
-                                    title: e.target.value
-                                })}
-                        />
-                        <label>Description</label>
-                        <textarea
-                            name="description"
-                            maxLength="200"
-                            placeholder="Enter post description..."
-                            value={postPreviewData.description}
-                            onChange={(e) => setPostPreviewData(
-                                {
-                                    ...postPreviewData,
-                                    description: e.target.value
-                                })}
-                        />
-                        <label>Image</label>
-                        <div className='update-post-preview'>
-                            <img alt='preview' src={postPreviewData.previewPhoto}/>
-                        </div>
-                        <input
-                            className='file-input'
-                            type="file"
-                            accept="image/*"
-                            name="image"
-                            onChange={onChangePicture}
-                        />
-                        <button type="submit">Edit</button>
-                        <button onClick={hideEditForm}>Cancel</button>
-                    </form>
-                </div>
-                <h1>{postData.title}</h1>
-                <img src={`${postData.image}`} alt='post'/>
-                <p>{postData.post_Description}</p>
-                <p>By: <strong>{postData.author}</strong></p>
-                <p>
-                    Uploaded: <Moment format="YYYY-MM-DD">{postData.date_Of_Creation}</Moment>
-                </p>
-                {+localStorage.getItem('UserId') === postData.user_Id || +localStorage.getItem('UserRoleId') === 1?
-                    <div className='post-page-buttons'>
-                        <button className='post-page-edit-button' onClick={editItem}>Edit</button>
-                        <button className='post-page-delete-button' onClick={deleteItem}>Delete</button>
-                    </div> :
-                    ''
-                }
-            </div>
-            <CommentList comments={postPreviewData.comments ? postPreviewData.comments :  null} postData = {postPreviewData ? postPreviewData : null}/>
+            <Container>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Edit post
+                        </Typography>
+                        <Box
+                            component="form">
+                            <TextField id="outlined-basic" label="Title" variant="outlined" sx={{marginTop:1, marginBottom:1}}/>
+                            <TextField
+                                id="outlined-multiline-flexible"
+                                label="Description"
+                                multiline
+                                maxRows={4}
+                                sx={{marginTop:1, marginBottom:1}}
+                            />
+                            <input type="file" id="file-upload"/>
+                            <Button variant="contained">Submit</Button>
+                            <Button variant="outlined">Cancel</Button>
+                        </Box>
+                    </Box>
+                </Modal>
+                {/*<div className={`blur ${postPreviewData.editForm ? '' : 'hide'}`} onClick={hideEditForm}></div>*/}
+                {/*<div className={`update-post-form ${postPreviewData.editForm ? '' : 'hide'}`}>*/}
+                    {/*<form onSubmit={confimUpdate}>*/}
+                    {/*    <label>Title</label>*/}
+                    {/*    <input*/}
+                    {/*        type="text"*/}
+                    {/*        name="title"*/}
+                    {/*        placeholder="Enter post title"*/}
+                    {/*        value={postPreviewData.title}*/}
+                    {/*        onChange={(e) => setPostPreviewData(*/}
+                    {/*            {*/}
+                    {/*                ...postPreviewData,*/}
+                    {/*                title: e.target.value*/}
+                    {/*            })}*/}
+                    {/*    />*/}
+                    {/*    <label>Description</label>*/}
+                    {/*    <textarea*/}
+                    {/*        name="description"*/}
+                    {/*        maxLength="200"*/}
+                    {/*        placeholder="Enter post description..."*/}
+                    {/*        value={postPreviewData.description}*/}
+                    {/*        onChange={(e) => setPostPreviewData(*/}
+                    {/*            {*/}
+                    {/*                ...postPreviewData,*/}
+                    {/*                description: e.target.value*/}
+                    {/*            })}*/}
+                    {/*    />*/}
+                    {/*    <label>Image</label>*/}
+                    {/*    <div className='update-post-preview'>*/}
+                    {/*        <img alt='preview' src={postPreviewData.previewPhoto}/>*/}
+                    {/*    </div>*/}
+                    {/*    <input*/}
+                    {/*        className='file-input'*/}
+                    {/*        type="file"*/}
+                    {/*        accept="image/*"*/}
+                    {/*        name="image"*/}
+                    {/*        onChange={onChangePicture}*/}
+                    {/*    />*/}
+                    {/*    <button type="submit">Edit</button>*/}
+                    {/*    <button onClick={hideEditForm}>Cancel</button>*/}
+                    {/*</form>*/}
+                {/*</div>*/}
+                    <Card>
+                        <CardActionArea>
+                            <CardMedia
+                                component="img"
+                                image={postData.image}
+                                alt="green iguana"
+                                sx={{maxWidth:500, maxHeight: 500}}
+                            />
+                        </CardActionArea>
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {postData.title}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {postData.post_Description}
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                                Uploaded: <Moment format="YYYY-MM-DD">{postData.date_Of_Creation}</Moment>
+                            </Typography>
+                            {+localStorage.getItem('UserId') === postData.user_Id || +localStorage.getItem('UserRoleId') === 1?
+                                <>
+                                    <Button variant="contained" onClick={handleOpen} sx={{marginRight:1}}>Edit</Button>
+                                    <Button variant="outlined" onClick={deleteItem}>Delete</Button>
+                                </>
+                                :
+                                ''
+                            }
+                        </CardContent>
+                    </Card>
+                <CommentList comments={postPreviewData.comments ? postPreviewData.comments :  null} postData = {postPreviewData ? postPreviewData : null}/>
+            </Container>
+
         </>
     );
 }

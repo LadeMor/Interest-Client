@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     BrowserRouter as Router,
     Routes,
     Route,
     Link, useParams
 } from "react-router-dom";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import GlobalStyles from '@mui/material/GlobalStyles';
 
 import "./NavBar.css";
 
@@ -20,6 +25,27 @@ import UserEdit from "../user/user-edit/UserEdit";
 
 function NavBar(){
 
+    const [tabs, setTabs] = useState([
+        {
+            id: 1,
+            label: "Interest",
+            value: "/",
+            path: "/"
+        },
+        {
+            id: 2,
+            label: "Registration",
+            value: "/registration",
+            path: "/registration"
+        },
+        {
+            id: 3,
+            label: "Login",
+            value: "/login",
+            path: "/login"
+        }
+    ]);
+
     let {postId} = useParams();
 
     const exitFromAccount = () => {
@@ -34,43 +60,32 @@ function NavBar(){
             localStorage.setItem('UserRoleId', '');
             window.location.replace("/");
         }
-
     };
 
     return(
-        <div className="nav-block">
+        <Box>
             <Router>
                 <header>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/">Interest</Link>
-                            </li>
-                            { localStorage.getItem("isUserLogin") === "true" ? <li>
-                                <Link to="/user">My page</Link>
-                            </li> : null}
-                            <li>
-                                <Link to="/registration">Registration</Link>
-                            </li>
-                            <li>
-                                <Link to="/login">Login</Link>
-                            </li>
-                            {+localStorage.getItem('UserRoleId') === 1?
-                                <li>
-                                    <Link to="/admin">Admin Page</Link>
-                                </li>
-                                :
-                                ''
-                            }
-                            {localStorage.getItem('isUserLogin') === 'true' ?
-                                <li>
-                                    <button className="exit-button" onClick={exitFromAccount}>Exit</button>
-                                </li>
-                                :
-                                ''
-                            }
-                        </ul>
-                    </nav>
+                    <Tabs>
+                        {tabs && tabs.map(item => (
+                            <Tab
+                                key={item.id}
+                                value={item.value}
+                                to={item.path}
+                                label={item.label}
+                                component={Link}
+                                sx={{padding: 3, fontSize:20}}/>
+                        ))}
+                        {localStorage.getItem("isUserLogin") === "true"
+                            ? <Tab value="/user" to="/user" label="My page" component={Link} sx={{padding: 3, fontSize:20}}/>
+                            : null}
+                        {+localStorage.getItem('UserRoleId') === 1 ?
+                            <Tab value="/admin" to="/admin"  label="Admin page" component={Link} sx={{padding: 3, fontSize:20}}/>
+                            : null}
+                        {localStorage.getItem('isUserLogin') === 'true' ?
+                            <Tab label="Exit" sx={{padding: 3, fontSize:20}}/>
+                            : null}
+                    </Tabs>
                 </header>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
@@ -86,7 +101,7 @@ function NavBar(){
                     <Route path="/user/useredit" element={<UserEdit/>}/>
                 </Routes>
             </Router>
-        </div>
+        </Box>
     );
 }
 

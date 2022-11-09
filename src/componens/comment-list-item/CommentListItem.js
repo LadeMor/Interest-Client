@@ -1,9 +1,12 @@
 import React, {useEffect} from "react";
 import Moment from "react-moment";
-import "./CommentListItem.css";
 import {deleteComment} from "../../services/comment-service/CommentService";
-
-import trashicon from "../../icons/trash-bin.png";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Typography from '@mui/material/Typography';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 
 function CommentListItem({data}){
 
@@ -15,20 +18,37 @@ function CommentListItem({data}){
     }
 
     return(
-        <ul>
-            <li className="comment-list-item" key={data.id}>
-                <h3>{data.author}</h3>
-                <Moment format="YYYY-MM-DD">
-                    <h6>{data.date_Of_Comment_Creation}</h6>
-                </Moment>
-                <p>{data.text}</p>
-                { data.user_Comment_Id === +localStorage.getItem("UserId") || +localStorage.getItem("UserRoleId") === 1 ?
-                    <img src={trashicon} width="40px" height="40px" onClick={handleClick}/>
-                    :
-                    null}
-            </li>
-        </ul>
-
+        <>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {data && data.map(item => (
+                    <ListItem alignItems="flex-start">
+                        <ListItemAvatar>
+                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={item.author}
+                            secondary={
+                                <React.Fragment>
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body2"
+                                        color="text.primary"
+                                    >
+                                        <Moment format="YYYY-MM-DD">
+                                            {item.date_Of_Comment_Creation}
+                                        </Moment>
+                                    </Typography>
+                                    <Typography>
+                                        {item.text}
+                                    </Typography>
+                                </React.Fragment>
+                            }
+                        />
+                    </ListItem>
+                ))}
+            </List>
+        </>
     );
 }
 

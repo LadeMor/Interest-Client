@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams, useNavigate} from "react-router-dom";
 import PostPreview from "../post preview/PostPreview";
 import {getPost} from "../../../services/post-service/PostService";
+import Container from '@mui/material/Container';
 
-import "./PostPage.css";
+
 
 import arrow_back from '../../../icons/arrow-back.svg';
 
@@ -24,19 +25,19 @@ function PostPage(){
     }, [postArr]);
 
     return(
-        <div>
-            <div className='back_arrow_block'>
-                <Link to="/">
-                    <img src={arrow_back}/>
-                </Link>
-            </div>
-            <div className='preview-content'>
+        <>
+            {/*<div className='back_arrow_block'>*/}
+            {/*    <Link to="/">*/}
+            {/*        <img src={arrow_back}/>*/}
+            {/*    </Link>*/}
+            {/*</div>*/}
+            <Container>
                 {(postArr === undefined || postArr === null || postArr === [] ?
                         "Loading" :
                         <PostPreview postData={postArr[0]}/>
                 )}
-            </div>
-        </div>
+            </Container>
+        </>
     );
 }
 

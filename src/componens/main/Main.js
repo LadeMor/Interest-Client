@@ -2,8 +2,12 @@ import React, {useEffect, useState} from "react";
 import PostCards from "../post/post-cards/PostCards";
 import {Link} from "react-router-dom";
 import {getAllPosts} from "../../services/post-service/PostService";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
 
-import "./Main.css";
+// import "./Main.css";
 
 import create from "../../icons/create.svg";
 import spinner from "../../icons/Rolling-1s-200px.svg";
@@ -101,38 +105,27 @@ function Main(){
 
     return(
         <div>
-            <div className="content-block-tools">
-                <h1>Tools</h1>
-                <ul>
-                    <li>
-                        <h3>Sort by:</h3>
-                        <select onChange={selectChange}>
-                            <option value="none">None</option>
-                            <option value="date">Date</option>
-                            <option value="alph">A-Z</option>
-                        </select>
-                    </li>
-                </ul>
-            </div>
-            {localStorage.getItem('isUserLogin') === 'true' ? <Link to="/post_create">
-                <div className='create-post-button'>
-                    <img src={create} alt='create-post'/>
-                </div>
-            </Link> :
-            null}
             <div className="content-block">
-                <div className="search-from">
-                    <form onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Search" onChange={handleChange}/>
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
-                {mainData.data === 'undefined' || mainData.data === null ? <img src={spinner} alt="spinner"/>
-                    : (mainData.resExist ?
-                    <PostCards post={mainData.data}/> :
-                    <div className="no-res-msg">
-                        <h1>No Result</h1>
-                    </div>)}
+                <Container>
+                    <Box
+                        onSubmit={handleSubmit}
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { marginRight: 1, marginBottom: 1, width: '30ch' },
+                            '& .MuiButton-root': { width: '10ch', marginBottom: 1, height:'7ch' }
+                        }}>
+                        <TextField type="text" placeholder="Search" onChange={handleChange}/>
+                        <Button variant="contained" type="submit">Submit</Button>
+                    </Box>
+                </Container>
+                <Container>
+                    {mainData.data === 'undefined' || mainData.data === null ? <img src={spinner} alt="spinner"/>
+                        : (mainData.resExist ?
+                        <PostCards post={mainData.data}/> :
+                        <div className="no-res-msg">
+                            <h1>No Result</h1>
+                        </div>)}
+                </Container>
             </div>
         </div>
     );
