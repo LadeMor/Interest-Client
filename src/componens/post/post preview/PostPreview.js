@@ -82,16 +82,6 @@ function PostPreview({postData}){
 
     }
 
-    const editItem = (e) => {
-        e.preventDefault();
-        setPostPreviewData({...postPreviewData, editForm: true});
-    }
-
-    const hideEditForm = (e) => {
-        e.preventDefault();
-        setPostPreviewData({...postPreviewData, editForm: false});
-    }
-
     const onChangePicture = (e) => {
         const file = e.target.files[0];
         pictureChange(file, setPostPreviewData, postPreviewData);
@@ -115,70 +105,48 @@ function PostPreview({postData}){
                             Edit post
                         </Typography>
                         <Box
-                            component="form">
-                            <TextField id="outlined-basic" label="Title" variant="outlined" sx={{marginTop:1, marginBottom:1}}/>
+                            component="form"
+                            onSubmit={confimUpdate}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Title"
+                                variant="outlined"
+                                sx={{marginTop:1, marginBottom:1}}
+                                value={postPreviewData.title}
+                                onChange={(e) => setPostPreviewData(
+                                    {
+                                        ...postPreviewData,
+                                        title: e.target.value
+                                    })}
+                                    />
                             <TextField
                                 id="outlined-multiline-flexible"
                                 label="Description"
                                 multiline
                                 maxRows={4}
                                 sx={{marginTop:1, marginBottom:1}}
+                                name="description"
+                                value={postPreviewData.description}
+                                onChange={(e) => setPostPreviewData(
+                                    {
+                                        ...postPreviewData,
+                                        description: e.target.value
+                                    })}
                             />
-                            <input type="file" id="file-upload"/>
-                            <Button variant="contained">Submit</Button>
-                            <Button variant="outlined">Cancel</Button>
+                            <input type="file" accept="image/*" name="image" onChange={onChangePicture} id="file-upload"/>
+                            <img src={postPreviewData.previewPhoto} style={{maxWidth:"300px", maxHeight:"500px", marginRight:"24px", marginBottom:"10px"}}/>
+                            <Button variant="contained" sx={{marginRight:2}} type="submit">Submit</Button>
+                            <Button variant="outlined" onClick={() => setOpen(false)}>Cancel</Button>
                         </Box>
                     </Box>
                 </Modal>
-                {/*<div className={`blur ${postPreviewData.editForm ? '' : 'hide'}`} onClick={hideEditForm}></div>*/}
-                {/*<div className={`update-post-form ${postPreviewData.editForm ? '' : 'hide'}`}>*/}
-                    {/*<form onSubmit={confimUpdate}>*/}
-                    {/*    <label>Title</label>*/}
-                    {/*    <input*/}
-                    {/*        type="text"*/}
-                    {/*        name="title"*/}
-                    {/*        placeholder="Enter post title"*/}
-                    {/*        value={postPreviewData.title}*/}
-                    {/*        onChange={(e) => setPostPreviewData(*/}
-                    {/*            {*/}
-                    {/*                ...postPreviewData,*/}
-                    {/*                title: e.target.value*/}
-                    {/*            })}*/}
-                    {/*    />*/}
-                    {/*    <label>Description</label>*/}
-                    {/*    <textarea*/}
-                    {/*        name="description"*/}
-                    {/*        maxLength="200"*/}
-                    {/*        placeholder="Enter post description..."*/}
-                    {/*        value={postPreviewData.description}*/}
-                    {/*        onChange={(e) => setPostPreviewData(*/}
-                    {/*            {*/}
-                    {/*                ...postPreviewData,*/}
-                    {/*                description: e.target.value*/}
-                    {/*            })}*/}
-                    {/*    />*/}
-                    {/*    <label>Image</label>*/}
-                    {/*    <div className='update-post-preview'>*/}
-                    {/*        <img alt='preview' src={postPreviewData.previewPhoto}/>*/}
-                    {/*    </div>*/}
-                    {/*    <input*/}
-                    {/*        className='file-input'*/}
-                    {/*        type="file"*/}
-                    {/*        accept="image/*"*/}
-                    {/*        name="image"*/}
-                    {/*        onChange={onChangePicture}*/}
-                    {/*    />*/}
-                    {/*    <button type="submit">Edit</button>*/}
-                    {/*    <button onClick={hideEditForm}>Cancel</button>*/}
-                    {/*</form>*/}
-                {/*</div>*/}
                     <Card>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 image={postData.image}
                                 alt="green iguana"
-                                sx={{maxWidth:500, maxHeight: 500}}
+                                sx={{maxWidth:500, maxHeight: 800}}
                             />
                         </CardActionArea>
                         <CardContent>

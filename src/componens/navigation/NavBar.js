@@ -83,7 +83,7 @@ function NavBar(){
                             <Tab value="/admin" to="/admin"  label="Admin page" component={Link} sx={{padding: 3, fontSize:20}}/>
                             : null}
                         {localStorage.getItem('isUserLogin') === 'true' ?
-                            <Tab label="Exit" sx={{padding: 3, fontSize:20}}/>
+                            <Tab label="Exit" sx={{padding: 3, fontSize:20}} onClick={exitFromAccount}/>
                             : null}
                     </Tabs>
                 </header>

@@ -1,6 +1,13 @@
 import {useState} from "react";
 import {isUserExistEmail, getUserByEmail} from "../../../services/user-service/UserService";
-import "./Login.css";
+import {
+    Container,
+    Box,
+    Typography,
+    Grid,
+    TextField,
+    Button} from "@mui/material";
+
 
 function Login(){
 
@@ -70,43 +77,53 @@ function Login(){
         })
     }
 
-
     return(
-        <div className="main-block">
-            <div className="main-block">
-                <div className="form-block-login">
-                    <h1>Login</h1>
-                    <form onSubmit={handleSubmit}>
-                        <label>Email</label>
-                        <input
-                            className={`email-input ${emailErrorMsg ? 'wrong-data' : ''}`}
-                            type="email"
-                            name="email"
-                            onChange={e => setFormData({
-                                ...formData,
-                                email: e.target.value
-                            })}
-                        />
-                        <h5 className={`error-validation-msg ${emailErrorMsg ? 'show' : 'hide'}`}>User is not exist</h5>
-                        <h5 className={`empty-values ${emptyValues ? 'show' : 'hide'}`}>Input data!</h5>
-                        <label>Password</label>
-                        <input
-                            className={`password-input ${passwordErrorMsg ? 'wrong-data' : ''}`}
-                            type="password"
-                            name="password"
-                            onChange={e => setFormData({
-                                ...formData,
-                                password: e.target.value
-                            })}
-                        />
-                        <h5 className={`error-validation-msg ${passwordErrorMsg ? 'show' : 'hide'}`}>Wrong password</h5>
-                        <h5 className={`empty-values ${emptyValues ? 'show' : 'hide'}`}>Input data!</h5>
-                        <button type="submit">
+        <div>
+            <Container>
+                <Box
+                    sx={
+                        {width: '100%',
+                            boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",
+                            marginBottom: 3,
+                            marginTop: 3,
+                            borderRadius:1,
+                            p:1}}>
+                    <Typography variant="h3" component="h3" sx={{marginBottom:2}}>
+                        Login
+                    </Typography>
+                    <Box onSubmit={handleSubmit} component="form">
+                        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{marginBottom:2}}>
+                            <Grid item xs={3}>
+                                <TextField id="outlined-basic"
+                                           label="Email"
+                                           variant="outlined"
+                                           type="email"
+                                           name="email"
+                                           onChange={e => setFormData({
+                                               ...formData,
+                                               email: e.target.value
+                                           })}
+                                           sx={{width: 250}}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <TextField id="outlined-basic"
+                                           label="Password"
+                                           variant="outlined"
+                                           type="password"
+                                           name="password"
+                                           onChange={e => setFormData({
+                                               ...formData,
+                                               password: e.target.value
+                                           })}
+                                           sx={{width: 250}}/>
+                            </Grid>
+                        </Grid>
+                        <Button type="submit" variant="contained">
                             Submit
-                        </button>
-                    </form>
-                </div>
-            </div>
+                        </Button>
+                    </Box>
+                </Box>
+            </Container>
         </div>
     );
 }

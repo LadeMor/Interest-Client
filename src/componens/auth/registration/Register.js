@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {isUserExistUsername, isUserExistEmail, addUser} from "../../../services/user-service/UserService";
 import {pictureChange, onPreviewChange} from "../../functions/Functions";
-import "./Register.css";
+import {
+    Container,
+    Box,
+    Typography,
+    Grid,
+    TextField,
+    Button} from "@mui/material";
+
 
 
 function Register(){
@@ -90,62 +97,92 @@ function Register(){
     }
 
     return(
-        <div className="main-block">
-            <div className="form-block-register">
-                <h1>Registration</h1>
-                <form onSubmit={handleSubmit}>
-                    <label>Username</label>
-                    <input
-                        className = 'error-value'
-                        type="text"
-                        name="username"
-                        onChange={e => setUserData({
-                            ...userData,
-                            username: e.target.value
-                        })}
-                    />
-                    <label>Description</label>
-                    <textarea name="description"
-                              maxLength="200"
-                              onChange={e => setUserData({
-                                  ...userData,
-                                  description: e.target.value
-                              })}>
-
-                    </textarea>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        onChange={e => setUserData({
-                            ...userData,
-                            email: e.target.value
-                        })}
-                    />
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        onChange={e => setUserData({
-                            ...userData,
-                            password: e.target.value
-                        })}
-                    />
-                    <label>Profile photo</label>
-                    <div className='image-preview'>
-                        <img src={userData.previewPhoto}/>
-                    </div>
-                    <input
-                        type="file"
-                        name="profilpic"
-                        accept="image/*"
-                        onChange={onChangePicture}
-                    />
-                    <button type="submit">
-                        Submit
-                    </button>
-                </form>
-            </div>
+        <div>
+            <Container>
+                <Box sx={
+                    {width: '100%',
+                        boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",
+                        marginBottom: 3,
+                        marginTop: 3,
+                        borderRadius:1,
+                        p:1}}>
+                    <Typography variant="h3" component="h3" sx={{marginBottom:2}}>
+                        Registration
+                    </Typography>
+                    <Box component="form"
+                         onSubmit={handleSubmit}>
+                        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{marginBottom:2}}>
+                            <Grid item xs={5}>
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Username"
+                                    variant="outlined"
+                                    type="text"
+                                    name="username"
+                                    onChange={e => setUserData({
+                                        ...userData,
+                                        username: e.target.value
+                                    })}
+                                    sx={{width: 450}}/>
+                            </Grid>
+                            <Grid item xs={5}>
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Description"
+                                    variant="outlined"
+                                    onChange={e => setUserData({
+                                                  ...userData,
+                                                  description: e.target.value
+                                              })}
+                                    sx={{width: 450}}/>
+                            </Grid>
+                            <Grid item xs={5}>
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Email"
+                                    variant="outlined"
+                                    type="email"
+                                    name="email"
+                                    onChange={e => setUserData({
+                                        ...userData,
+                                        email: e.target.value
+                                    })}
+                                    sx={{width: 450}}/>
+                            </Grid>
+                            <Grid item xs={5}>
+                                <TextField
+                                    id="outlined-basic"
+                                    type="password"
+                                    label="Password"
+                                    variant="outlined"
+                                    name="password"
+                                    onChange={e => setUserData({
+                                        ...userData,
+                                        password: e.target.value
+                                    })}
+                                    sx={{width: 450}}/>
+                            </Grid>
+                        </Grid>
+                        <Typography variant="h6" component="h6">
+                            Profile photo
+                        </Typography>
+                        <div className='image-preview'>
+                            <img src={userData.previewPhoto}/>
+                        </div>
+                        <input
+                            type="file"
+                            name="profilpic"
+                            accept="image/*"
+                            onChange={onChangePicture}
+                            style={{marginBottom:"10px"}}
+                        />
+                        <br/>
+                        <Button type="submit" variant="contained">
+                            Submit
+                        </Button>
+                    </Box>
+                </Box>
+            </Container>
         </div>
     );
 }
