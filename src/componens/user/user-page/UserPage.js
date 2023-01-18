@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from "react";
 
-import "./UserPage.css";
+
 import {Link} from "react-router-dom";
 import {getAllPosts} from "../../../services/post-service/PostService";
 import PostCards from "../../post/post-cards/PostCards";
+import {Container,
+        Avatar,
+        Typography,
+        Button} from "@mui/material";
 
 function UserPage(){
 
@@ -30,25 +34,29 @@ function UserPage(){
 
 
     return(
-        <div className = "main-user">
+        <div>
             {(user.isLogin === 'true' ?
-                <div className="user-info">
-                    <img src={userPhoto} alt="Avatar" id="avatar"/>
-                    <h1>{user.username}</h1>
-                    <div className="user-info-desc">
-                        <p>
+                <div>
+                    <Container>
+                        <Avatar
+                            alt="Remy Sharp"
+                            src={userPhoto}
+                            sx={{ width: 200, height: 200 }}
+                        />
+                        <Typography variant="h3" component="h2">
+                            {user.username}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
                             {user.userDescription}
-                        </p>
-                    </div>
-                    <Link to="/post_create">
-                        <button>Create post</button>
-                    </Link>
-                    {/*<Link to="/user/useredit">*/}
-                    {/*    <button>Edit profile</button>*/}
-                    {/*</Link>*/}
-                    <div className="user-page-cards">
-                        <PostCards post={user.posts}/>
-                    </div>
+                        </Typography>
+                        <Link to="/post_create" >
+                            <Button variant="contained" style={{marginBottom:"10px"}}>Create post</Button>
+                        </Link>
+                        <div className="user-page-cards">
+                            <PostCards post={user.posts}/>
+                        </div>
+                    </Container>
+
                 </div>
                 :
                 <h1>No user</h1>)}

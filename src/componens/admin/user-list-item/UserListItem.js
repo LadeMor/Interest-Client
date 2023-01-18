@@ -1,16 +1,23 @@
 import React from "react";
 
-import './UserListItem.css';
+
 import {Link} from "react-router-dom";
+import {TableRow, TableCell} from "@mui/material";
 
 function UserListItem({user}){
     return(
-        <div className='user-list-item'>
+        <div>
             <Link to={`userpage/${user.id}`}>
-                <li key={user.id}>
-                    <span className='user-name'>{user.username}</span>
-                    <span className='user-email'>{user.email}</span>
-                </li>
+                <TableRow
+                    key={user.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                    <TableCell component="th" scope="row">
+                        {user.id}
+                    </TableCell>
+                    <TableCell align="right">{user.username}</TableCell>
+                    <TableCell align="right">{user.email}</TableCell>
+                </TableRow>
             </Link>
         </div>
     );

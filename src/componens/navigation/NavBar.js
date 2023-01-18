@@ -66,7 +66,9 @@ function NavBar(){
         <Box>
             <Router>
                 <header>
-                    <Tabs>
+                    <Tabs
+                        indicatorColor="secondary"
+                        textColor="inherit">
                         {tabs && tabs.map(item => (
                             <Tab
                                 key={item.id}
@@ -77,10 +79,12 @@ function NavBar(){
                                 sx={{padding: 3, fontSize:20}}/>
                         ))}
                         {localStorage.getItem("isUserLogin") === "true"
-                            ? <Tab value="/user" to="/user" label="My page" component={Link} sx={{padding: 3, fontSize:20}}/>
+                            ? <Tab value="/user" to="/user" label="My page"
+                                   component={Link} sx={{padding: 3, fontSize:20}}/>
                             : null}
                         {+localStorage.getItem('UserRoleId') === 1 ?
-                            <Tab value="/admin" to="/admin"  label="Admin page" component={Link} sx={{padding: 3, fontSize:20}}/>
+                            <Tab value="/admin" to="/admin"  label="Admin page"
+                                 component={Link} sx={{padding: 3, fontSize:20}}/>
                             : null}
                         {localStorage.getItem('isUserLogin') === 'true' ?
                             <Tab label="Exit" sx={{padding: 3, fontSize:20}} onClick={exitFromAccount}/>

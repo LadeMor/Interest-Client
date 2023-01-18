@@ -5,6 +5,8 @@ import nouser from "../../../img/no-user-photo-placeholder.png";
 import './UserPageItem.css';
 import {getAllPosts} from "../../../services/post-service/PostService";
 import PostCards from "../../post/post-cards/PostCards";
+import {Container, Typography} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 function UserPageItem(){
 
@@ -50,28 +52,41 @@ function UserPageItem(){
             case 2:
                 return "User";
                 break;
+            default:
+                return "No role";
+                break;
         }
     }
 
     const userInfoBlock =(
             <>
-                <img
+                <Avatar
+                    alt="Remy Sharp"
                     src={(userPageData.profilePhoto)}
-                    alt={`profile photo of user: ${userPageData.username}`}
-                    style={{maxWidth:"400px", maxHeight:"700px"}}/>
-                <ul>
-                    <li>{userPageData.username}</li>
-                    <li>{userPageData.description}</li>
-                    <li>{userPageData.email}</li>
-                    <li>{roleCheck(userPageData.roleId)}</li>
-                </ul>
+                    sx={{ width: 200, height: 200 }}
+                />
+                <Typography variant="h3" component="h2">
+                    {userPageData.username}
+                </Typography>
+                <Typography variant="h5" component="h6">
+                    Description: {userPageData.description}
+                </Typography>
+                <Typography variant="h5" component="h6">
+                    Email: {userPageData.email}
+                </Typography>
+                <Typography variant="h5" component="h6">
+                    Role: {roleCheck(userPageData.roleId)}
+                </Typography>
             </>
     );
 
     return(
         <div className="user-page-item-block">
-            {userInfoBlock}
-            <PostCards post={userPosts}/>
+            <Container>
+                {userInfoBlock}
+                <PostCards post={userPosts}/>
+            </Container>
+
         </div>
     )
 }
