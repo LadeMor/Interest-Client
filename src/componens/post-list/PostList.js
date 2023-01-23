@@ -26,7 +26,7 @@ function PostList(){
                     data: actualData
                 })
             })
-    }, []);
+    },[]);
 
     useEffect(() => {
         switch (mainData.sort) {
