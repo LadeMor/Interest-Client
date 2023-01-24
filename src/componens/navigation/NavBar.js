@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Link, useParams
+    useParams
 } from "react-router-dom";
 import "./NavBar.css";
 import Box from "@mui/material/Box";

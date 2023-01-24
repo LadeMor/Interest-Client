@@ -13,7 +13,8 @@ function PostCards({post}){
                     image={posts.image}
                     post_Description={posts.post_Description}
                     author={posts.author}
-                    date={posts.date_Of_Creation}/>
+                    date={posts.date_Of_Creation}
+                    user_Id={posts.user_Id}/>
             ))}
         </Grid>
     );

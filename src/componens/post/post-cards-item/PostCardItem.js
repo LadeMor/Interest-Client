@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import './PostCardItem.css'
 import {Link} from "react-router-dom";
@@ -6,31 +6,43 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import {getUserById} from "../../../services/user-service/UserService";
 
 
-function PostCardItem({id, title, image, post_Description, author, date}){
+function PostCardItem({id, title, image, post_Description, author, date, user_Id}){
+
+    const [userInfo, setUserInfo] = useState(null);
+
+    const getFormatDate = (date) => {
+        let postDateCreation = new Date(date);
+        let postMonth = postDateCreation.getMonth()+1 < 10 ? `0${postDateCreation.getMonth()+1}` : postDateCreation.getMonth()+1;
+        let postDay = postDateCreation.getDate() < 10 ? `0${postDateCreation.getDate()}` : postDateCreation.getDate();
+        return `${postDateCreation.getFullYear()}/${postMonth}/${postDay}`;
+    }
+
+    useEffect(() => {
+        if(userInfo === null){
+            getUserById(user_Id).then(res => setUserInfo(res));
+        }
+    }, [userInfo])
+
     return(
         <Link to={`post/${id}`}>
             <Card key={id} sx={{ maxWidth: 345 , margin: 1}}>
                 <CardHeader
                     avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            R
-                        </Avatar>
+                        <Avatar aria-label="recipe" src={userInfo === null ? '' :  userInfo[0].profile_Photo}/>
                     }
                     action={
                         <IconButton aria-label="settings">
 
                         </IconButton>
                     }
-                    title={title}
-                    subheader={date}
+                    title={author}
+                    subheader={getFormatDate(date)}
                 />
                 <CardMedia
                     component="img"
@@ -40,13 +52,9 @@ function PostCardItem({id, title, image, post_Description, author, date}){
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
-                        {post_Description}
+                        {title}
                     </Typography>
                 </CardContent>
-                {/*<h1>{title}</h1>*/}
-                {/*<img src={`${image}`}/>*/}
-                {/*<p>{post_Description}</p>*/}
-                {/*<h3>{author}</h3>*/}
             </Card>
         </Link>
     );
