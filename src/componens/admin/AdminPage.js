@@ -16,9 +16,7 @@ function AdminPage(){
     },[]);
 
     return(
-        <Container>
-            <UserList userList={userList}/>
-        </Container>
+        <UserList userList={userList}/>
     );
 }
 

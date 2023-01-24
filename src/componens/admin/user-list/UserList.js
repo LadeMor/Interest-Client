@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-
-
 import UserListItem from "../user-list-item/UserListItem";
 import {
     Box,
@@ -10,7 +8,11 @@ import {
     TextField,
     ToggleButton,
     ToggleButtonGroup,
-    Typography
+    Typography,
+    Select,
+    FormControl,
+    InputLabel,
+    MenuItem
 } from "@mui/material";
 
 function UserList({userList}){
@@ -64,13 +66,19 @@ function UserList({userList}){
         setUsers(userList);
     }, [userList])
 
+    const [age, setAge] = React.useState('');
+
+    const selectChange = (event) => {
+        setAge(event.target.value);
+    };
+
     return(
         <div>
             <Container>
                 <Typography variant="h3">
                     Users
                 </Typography>
-                <Typography variant="h4" sx={{marginBottom:2}}>
+                <Typography variant="h5" sx={{marginBottom:2}}>
                     Search by:
                 </Typography>
                 <ToggleButtonGroup
@@ -83,10 +91,27 @@ function UserList({userList}){
                     <ToggleButton value="Username">Username</ToggleButton>
                     <ToggleButton value="Email">Email</ToggleButton>
                 </ToggleButtonGroup>
+                <Typography variant="h5" sx={{marginBottom:2}}>
+                    Sort by:
+                </Typography>
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={age}
+                        label="Age"
+                        onChange={selectChange}
+                    >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                </FormControl>
                 <Box
                 component="form"
                 onSubmit={handleSubmit}>
-                    <TextField id="outlined-basic" label="Search" variant="outlined" type='text' onChange={handleChange} sx={{marginRight:1}}/>
+                    <TextField id="outlined-basic" label="Search" variant="outlined" type='text' onChange={selectChange} sx={{marginRight:1}}/>
                     <Button variant="contained" sx={{height:"55px"}} type="submit">Search</Button>
                 </Box>
                 <TableContainer>
