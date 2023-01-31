@@ -11,7 +11,10 @@ import {
     Button,
     Tooltip,
     MenuItem,
+    Badge,
 Menu} from '@mui/material';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import {
     userExitFromAccount,
     getIsUserLogin,
@@ -174,8 +177,20 @@ function AppPanel(){
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
+                            <IconButton size="large" aria-label="mails" color="inherit">
+                                <Badge badgeContent={4} color="error">
+                                    <MailIcon/>
+                                </Badge>
+                            </IconButton>
+                            <Link to="/notifications" style={{ color: "inherit"}}>
+                                <IconButton size="large" aria-label="notifications" color="inherit">
+                                    <Badge badgeContent={17} color="error">
+                                        <NotificationsIcon/>
+                                    </Badge>
+                                </IconButton>
+                            </Link>
                             <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft:1 }}>
                                     <Avatar alt="Remy Sharp" src={userPhoto} />
                                 </IconButton>
                             </Tooltip>
