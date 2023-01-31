@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {createPost} from "../../../services/post-service/PostService";
-import {pictureChange, onPreviewChange} from "../../functions/Functions";
+import {pictureChange, onPreviewChange} from "../../functions/Preview";
 import './PostCreate.css';
 
 function PostCreate(){

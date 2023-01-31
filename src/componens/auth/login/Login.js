@@ -7,7 +7,7 @@ import {
     Grid,
     TextField,
     Button} from "@mui/material";
-
+import {addDataToStorage} from "../../functions/LocalStorageManager";
 
 function Login(){
 
@@ -18,17 +18,6 @@ function Login(){
     const [emailErrorMsg, setEmailErrorMag] = useState(false);
     const [passwordErrorMsg, setPasswordErrorMsg] = useState(false);
     const [emptyValues, setEmptyValues] = useState(false);
-
-    function addDataToStorage(data){
-        localStorage.setItem('isUserLogin', true);
-        localStorage.setItem('UserId', data.id);
-        localStorage.setItem('Username', data.username);
-        localStorage.setItem('UserPassword', data.password);
-        localStorage.setItem('UserEmail', data.email);
-        localStorage.setItem('UserDescription', data.description);
-        localStorage.setItem('UserRoleId', data.roleId);
-        localStorage.setItem('UserProfilePhoto', data.profile_Photo);
-    }
 
     async function validateLoginData(){
 

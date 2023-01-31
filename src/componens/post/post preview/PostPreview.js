@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import CommentList from "../../comment-list/CommentList";
-import {pictureChange, onPreviewChange} from "../../functions/Functions";
+import {pictureChange, onPreviewChange} from "../../functions/Preview";
 import {deletePost, updatePost} from "../../../services/post-service/PostService";
 import Moment from 'react-moment';
 import {getCommentsByPostId} from "../../../services/comment-service/CommentService";

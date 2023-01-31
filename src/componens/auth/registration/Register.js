@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {isUserExistUsername, isUserExistEmail, addUser} from "../../../services/user-service/UserService";
-import {pictureChange, onPreviewChange} from "../../functions/Functions";
+import {pictureChange, onPreviewChange} from "../../functions/Preview";
 import {
     Container,
     Box,

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './UserEdit.css';
-import {onPreviewChange, pictureChange} from "../../functions/Functions";
+import {onPreviewChange, pictureChange} from "../../functions/Preview";
 import {updateUser} from "../../../services/user-service/UserService";
 
 function UserEdit() {

@@ -12,6 +12,10 @@ import {
     Tooltip,
     MenuItem,
 Menu} from '@mui/material';
+import {
+    userExitFromAccount,
+    getIsUserLogin,
+getUserRoleId} from "../functions/LocalStorageManager";
 
 function AppPanel(){
 
@@ -54,13 +58,7 @@ function AppPanel(){
     const exitFromAccount = () => {
         let userSure = window.confirm("Are you sure you want to log out of your account?");
         if(userSure){
-            localStorage.setItem('isUserLogin', "false");
-            localStorage.setItem('UserId', '');
-            localStorage.setItem('Username', '');
-            localStorage.setItem('UserPassword', '');
-            localStorage.setItem('UserEmail', '');
-            localStorage.setItem('UserDescription', '');
-            localStorage.setItem('UserRoleId', '');
+            userExitFromAccount();
             window.location.replace("/");
         }
     };
@@ -181,6 +179,7 @@ function AppPanel(){
                                     <Avatar alt="Remy Sharp" src={userPhoto} />
                                 </IconButton>
                             </Tooltip>
+                            {(getIsUserLogin() === "true" ?
                             <Menu
                                 sx={{ mt: '45px' }}
                                 id="menu-appbar"
@@ -197,14 +196,54 @@ function AppPanel(){
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {setting.map((setting) => (
-                                    <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                                        <Link to={`${setting.path}`} style={{color: "black"}}>
-                                            <Typography textAlign="center">{setting.label}</Typography>
+
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to="/user" style={{color: "black"}}>
+                                        <Typography textAlign="center">Account</Typography>
+                                    </Link>
+                                </MenuItem>
+                                {(getUserRoleId() === '1' ?
+                                <>
+                                    <MenuItem onClick={handleCloseUserMenu}>
+                                        <Link to="/admin" style={{color: "black"}}>
+                                            <Typography textAlign="center">Admin page</Typography>
                                         </Link>
                                     </MenuItem>
-                                ))}
+                                </>
+                                    : null)}
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography onClick={exitFromAccount} textAlign="center">Exit</Typography>
+                                </MenuItem>
                             </Menu>
+                                :
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to="/registration" style={{color: "black"}}>
+                                        <Typography textAlign="center">Register</Typography>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link to="/login" style={{color: "black"}}>
+                                        <Typography textAlign="center">Login</Typography>
+                                    </Link>
+                                </MenuItem>
+                            </Menu>)}
                         </Box>
                     </Toolbar>
                 </Container>
