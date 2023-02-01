@@ -19,6 +19,7 @@ import UserPageItem from "../admin/user-page-item/UserPageItem";
 import UserEdit from "../user/user-edit/UserEdit";
 import AppPanel from "../app-bar/AppPanel";
 import NotificationList from "../notification-list/NotificationList";
+import Messenger from "../messenger/Messenger";
 
 
 function NavBar(){
@@ -42,6 +43,7 @@ function NavBar(){
                     <Route path="/admin/userpage/:userId" element={<UserPageItem/>}/>
                     <Route path="/user/useredit" element={<UserEdit/>}/>
                     <Route path="/notifications" element={<NotificationList/>}/>
+                    <Route path="/messenger" element={<Messenger/>}/>
                 </Routes>
             </Router>
         </Box>

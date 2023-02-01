@@ -177,11 +177,13 @@ function AppPanel(){
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <IconButton size="large" aria-label="mails" color="inherit">
-                                <Badge badgeContent={4} color="error">
-                                    <MailIcon/>
-                                </Badge>
-                            </IconButton>
+                            <Link to="/messenger" style={{ color: "inherit"}}>
+                                <IconButton size="large" aria-label="mails" color="inherit">
+                                    <Badge badgeContent={4} color="error">
+                                        <MailIcon/>
+                                    </Badge>
+                                </IconButton>
+                            </Link>
                             <Link to="/notifications" style={{ color: "inherit"}}>
                                 <IconButton size="large" aria-label="notifications" color="inherit">
                                     <Badge badgeContent={17} color="error">

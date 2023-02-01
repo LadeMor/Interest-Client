@@ -1,34 +1,71 @@
-import React, {useState} from "react";
-import {Container} from "@mui/material";
+import React, { useState } from "react";
+import {Container,
+    List,
+    ListItem,
+    ListItemText,
+    Typography,
+    ListItemButton,
+    ListItemAvatar,
+    Avatar,
+    Divider
+} from "@mui/material";
 
-/*
-Types of notifications
+const notifications = [
+    {
+        id: 1,
+        type: "comment",
+        date: "2023-01-04T00:00:00",
+        content: "This is a really cool post",
+        author: "Gaibo"
+    },
+    {
+        id: 2,
+        type: "exhibitionSoon",
+        date: "2023-01-07T00:00:00",
+        content: "Exhibition will be very soon",
+        author: "Organizer"
+    },
+    {
+        id: 3,
+        type: "exhibitionStarted",
+        date: "2023-01-10T00:00:00",
+        content: "Exhibition have started already",
+        author: "Organizer"
+    }
+];
 
-* Comment
-* Exhibition will be very soon
-* Exhibition have started already
-*
-*/
-
-function NotificationList(){
-
-    const [notificationList, setNotificationList] = useState([
-        {
-            id:1,
-            type: "comment",
-            date: "2023-01-04T00:00:00",
-            content: "This is really cool post",
-            author: "Gaibo",
-        }
-    ]);
+const NotificationList = () => {
+    const [notifs, setNotifs] = useState(notifications);
 
     return (
-        <>
-            <Container>
-                <h1>Notification List</h1>
-            </Container>
-        </>
-    )
-}
+        <Container>
+            <List>
+                <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary="Brunch this weekend?"
+                        secondary={
+                            <React.Fragment>
+                                <Typography
+                                    sx={{ display: 'inline' }}
+                                    component="span"
+                                    variant="body2"
+                                    color="text.primary"
+                                >
+                                    Ali Connors
+                                </Typography>
+                                {" — I'll be in your neighborhood doing errands this…"}
+                            </React.Fragment>
+                        }
+                    />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+            </List>
+        </Container>
+
+    );
+};
 
 export default NotificationList;
