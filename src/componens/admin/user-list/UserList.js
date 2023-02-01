@@ -21,6 +21,7 @@ function UserList({userList}){
     const [searchData, setSearchData] = useState('');
     const [alignment, setAlignment] = useState('Username');
     const [filterData, setFilterData] = useState('Username');
+    const [sortOption, setSortOption] = useState(0);
 
     const handleChange = e => {
         setSearchData(e.target.value.toLowerCase());
@@ -33,44 +34,34 @@ function UserList({userList}){
 
     const handleSubmit = e => {
         e.preventDefault();
-        switch (filterData){
-            case 'Username':
-                if(searchData.trim() === ''){
-                    setUsers(userList);
-                }else if(userList.filter(user => user.username.toLowerCase().includes(searchData)) === ''){
-                } else{
-                    setUsers(userList
-                        .filter(user => user
-                            .username
-                            .toLowerCase()
-                            .includes(searchData)));
-                }
+
+        let filteredUsers = userList.filter(user => {
+            const value = filterData === 'Username' ? user.username : user.email;
+            return value.toLowerCase().includes(searchData.trim().toLowerCase());
+        });
+
+        switch(sortOption){
+            case 2:
+                filteredUsers = filteredUsers.sort((a, b) => a.username.localeCompare(b.username));
                 break;
-            case 'Email':
-                if(searchData.trim() === ''){
-                    setUsers(userList);
-                }else if(userList.filter(user => user.email.toLowerCase().includes(searchData)) === ''){
-                } else{
-                    setUsers(userList
-                        .filter(user => user
-                            .email
-                            .toLowerCase()
-                            .includes(searchData)));
-                }
+            case 3:
+                filteredUsers = filteredUsers.sort((a, b) => a.email.localeCompare(b.email));
                 break;
+            default:
+                filteredUsers = filteredUsers.sort((a, b) => a.id - b.id);
         }
 
-    }
+        setUsers(searchData.trim() === '' ? userList : filteredUsers);
+    };
 
     useEffect(() => {
         setUsers(userList);
     }, [userList])
 
-    const [age, setAge] = React.useState('');
-
-    const selectChange = (event) => {
-        setAge(event.target.value);
-    };
+    const optionChange = (e) => {
+        e.preventDefault();
+        setSortOption(e.target.value);
+    }
 
     return(
         <div>
@@ -95,23 +86,24 @@ function UserList({userList}){
                     Sort by:
                 </Typography>
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Options</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={age}
+                        value={sortOption}
                         label="Age"
-                        onChange={selectChange}
+                        onChange={optionChange}
+                        sx={{marginBottom:2}}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={1}>Id</MenuItem>
+                        <MenuItem value={2}>Username</MenuItem>
+                        <MenuItem value={3}>User Email</MenuItem>
                     </Select>
                 </FormControl>
                 <Box
                 component="form"
                 onSubmit={handleSubmit}>
-                    <TextField id="outlined-basic" label="Search" variant="outlined" type='text' onChange={selectChange} sx={{marginRight:1}}/>
+                    <TextField id="outlined-basic" label="Search" variant="outlined" type='text' onChange={handleChange} sx={{marginRight:1}}/>
                     <Button variant="contained" sx={{height:"55px"}} type="submit">Search</Button>
                 </Box>
                 <TableContainer>
