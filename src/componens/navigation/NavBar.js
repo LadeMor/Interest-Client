@@ -20,6 +20,7 @@ import UserEdit from "../user/user-edit/UserEdit";
 import AppPanel from "../app-bar/AppPanel";
 import NotificationList from "../notification-list/NotificationList";
 import Messenger from "../messenger/Messenger";
+import ExhibitionsCalendar from "../exhibitions-calendar/ExhibitionsCalendar";
 
 
 function NavBar(){
@@ -44,6 +45,7 @@ function NavBar(){
                     <Route path="/user/useredit" element={<UserEdit/>}/>
                     <Route path="/notifications" element={<NotificationList/>}/>
                     <Route path="/messenger" element={<Messenger/>}/>
+                    <Route path="/calendar" element={<ExhibitionsCalendar/>}/>
                 </Routes>
             </Router>
         </Box>

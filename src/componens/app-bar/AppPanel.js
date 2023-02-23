@@ -15,6 +15,7 @@ import {
 Menu} from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {
     userExitFromAccount,
     getIsUserLogin,
@@ -177,6 +178,13 @@ function AppPanel(){
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
+                            <Link to="/calendar" style={{ color: "inherit"}}>
+                                <IconButton size="large" aria-label="mails" color="inherit">
+                                    <Badge badgeContent={4} color="error">
+                                        <CalendarMonthIcon/>
+                                    </Badge>
+                                </IconButton>
+                            </Link>
                             <Link to="/messenger" style={{ color: "inherit"}}>
                                 <IconButton size="large" aria-label="mails" color="inherit">
                                     <Badge badgeContent={4} color="error">

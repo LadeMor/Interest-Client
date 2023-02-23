@@ -45,7 +45,7 @@ const NotificationList = () => {
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>
                     <ListItemText
-                        primary="Brunch this weekend?"
+                        primary="Exhibition will be very soon"
                         secondary={
                             <React.Fragment>
                                 <Typography
@@ -54,9 +54,9 @@ const NotificationList = () => {
                                     variant="body2"
                                     color="text.primary"
                                 >
-                                    Ali Connors
+                                    Dareck
                                 </Typography>
-                                {" — I'll be in your neighborhood doing errands this…"}
+                                {" — At 2 march will be our new winter gallery..."}
                             </React.Fragment>
                         }
                     />
