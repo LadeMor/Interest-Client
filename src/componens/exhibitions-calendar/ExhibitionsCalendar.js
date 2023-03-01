@@ -1,9 +1,13 @@
 import React, {useState} from "react";
 import {Container, Box, Grid} from "@mui/material";
 import Calendar from 'react-calendar';
+import {useStyles} from './CalendarStyles';
+import 'react-calendar/dist/Calendar.css';
+
 
 function ExhibitionsCalendar(){
 
+    const classes = useStyles();
     const [date, setDate] = useState(new Date());
 
     const onChange = date => {
@@ -43,7 +47,9 @@ function ExhibitionsCalendar(){
                                 textAlign: "center",
                             }}
                         >
-                            <Calendar onChange={onChange} value={date} />
+                            <Calendar onChange={onChange}
+                                      value={date}
+                                      />
                         </Box>
                     </Grid>
                 </Grid>
