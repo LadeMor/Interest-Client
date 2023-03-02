@@ -7,8 +7,8 @@ import {
     Button,
     CardContent} from "@mui/material";
 
-import landscape from "../../img/exhibition-photo-titles/mountain-landscape-g81e3a8da4_1920.jpg";
-import imageRav from "../../img/exhibition-photo-titles/1a34261c15c100fe3ce4dd14e99ea507.jpg";
+import landscape from "../../img/exhibition-photo-titles/exhibition_preview_1.jpg";
+import imageRav from "../../img/exhibition-photo-titles/exhibition_preview_2.jpg";
 
 function ExhibitionsList(){
 

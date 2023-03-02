@@ -1,40 +1,74 @@
 import React from "react";
-import {Paper,
-    List,
-    ListItem,
-    ListItemAvatar,
-    Avatar,
-    ListItemText,
-    Divider,
+import {
     Container,
-Grid,
-    ListSubheader} from "@mui/material";
+    Grid, Box, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Divider
+} from "@mui/material";
 
-const messages = [
+
+const chatList = [
     {
         id: 1,
-        sender: "John Doe",
-        message: "Hi there! How are you?",
-        date: "2022-12-25T10:00:00"
+        name: "Marko",
+        avatar: "../../img/avatars/avatar_1/jpg",
+        lastMessage: "Ok, lets do this tomorrow"
     },
     {
         id: 2,
-        sender: "Jane Doe",
-        message: "I'm good, thanks! How about you?",
-        date: "2022-12-25T10:05:00"
+        name: "Anna",
+        avatar: "../../img/avatars/avatar_2/jpeg",
+        lastMessage: "Photo"
     },
     {
         id: 3,
-        sender: "John Doe",
-        message: "I'm doing great. What have you been up to lately?",
-        date: "2022-12-25T10:10:00"
-    }
+        name: "PixelDante",
+        avatar: "../../img/avatars/avatar_3/jpg",
+        lastMessage: "I will try this technic soon"
+    },
 ];
 
 const ChatList = () => {
     return (
         <Container>
-            <h1>Mails</h1>
+            <Grid container spacing={2}>
+                <Grid item xs={4}>
+                    <Box sx={{
+                        border:'solid',
+                        borderWidth:1,
+                        borderColor:'black',
+                        height:'100%'}}>
+                        <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                            {chatList && chatList.map(item => (
+                                <>
+                                    <ListItem alignItems="flex-start" key={item.id}>
+                                        <ListItemAvatar>
+                                            <Avatar alt="Remy Sharp" src={item.avatar} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={item.name}
+                                            secondary={
+                                                <React.Fragment>
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="text.primary"
+                                                    >
+                                                        {item.lastMessage}
+                                                    </Typography>
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </>
+                            ))}
+                        </List>
+                    </Box>
+                </Grid>
+                <Grid item xs={6}>
+                    <Box sx={{height:'100%'}}>d</Box>
+                </Grid>
+            </Grid>
         </Container>
     );
 };
