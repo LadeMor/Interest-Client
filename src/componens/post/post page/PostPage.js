@@ -36,7 +36,7 @@ function PostPage(){
             <Container>
                 {(postArr === undefined || postArr === null || postArr === [] ?
                         "Loading" :
-                        <PostPreview postData={postArr[0]}/>
+                        <PostPreview postData={postArr}/>
                 )}
             </Container>
         </>

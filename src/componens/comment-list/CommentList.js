@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 
 
 
-function CommentList({comments, postData}) {
+function CommentList({comments, postData, postId}) {
 
     const [commentText, setCommentText] = useState(null);
 
@@ -22,17 +22,20 @@ function CommentList({comments, postData}) {
         e.preventDefault();
         if(commentText){
             const data = {
-                post_Comment_Id: postData.postId,
+                post_Comment_Id: postId,
                 user_Comment_Id: +localStorage.getItem("UserId"),
                 author: localStorage.getItem("Username"),
                 text: commentText
             }
 
             createComment(data)
-                .then(() =>  window.location.reload())
                 .catch((res) => console.log(res));
         }
     }
+
+    useEffect(() =>{
+        //console.log(comments);
+    })
 
     return(
         <Container>

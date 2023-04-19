@@ -46,10 +46,10 @@ function PostPreview({postData}){
 
     useEffect(() => {
         if(postData){
-            getCommentsByPostId(postData.id).then(res => {
+            getCommentsByPostId(postData.post_Id).then(res => {
                 if(postPreviewData.comments === null){
+                    console.log(res);
                     setPostPreviewData({...postPreviewData, comments: res});
-
                 }
             });
         }
@@ -169,7 +169,10 @@ function PostPreview({postData}){
                             }
                         </CardContent>
                     </Card>
-                <CommentList comments={postPreviewData.comments ? postPreviewData.comments :  null} postData = {postPreviewData ? postPreviewData : null}/>
+                <CommentList
+                    comments={postPreviewData.comments ? postPreviewData.comments :  null}
+                    postData = {postPreviewData ? postPreviewData : null}
+                    postId = {postData.post_Id ? postData.post_Id : null}/>
             </Container>
 
         </>

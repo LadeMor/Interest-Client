@@ -21,6 +21,7 @@ import AppPanel from "../app-bar/AppPanel";
 import NotificationList from "../notification-list/NotificationList";
 import Messenger from "../messenger/Messenger";
 import ExhibitionsCalendar from "../exhibitions-calendar/ExhibitionsCalendar";
+import Subscriptions from "../subscriptions/Subscriptions";
 
 
 function NavBar(){
@@ -46,6 +47,7 @@ function NavBar(){
                     <Route path="/notifications" element={<NotificationList/>}/>
                     <Route path="/messenger" element={<Messenger/>}/>
                     <Route path="/calendar" element={<ExhibitionsCalendar/>}/>
+                    <Route path="/subscriptions" element={<Subscriptions/>}/>
                 </Routes>
             </Router>
         </Box>

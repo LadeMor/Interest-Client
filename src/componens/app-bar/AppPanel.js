@@ -13,9 +13,11 @@ import {
     MenuItem,
     Badge,
 Menu} from '@mui/material';
+import './AppPanel.css';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import StarIcon from '@mui/icons-material/Star';
 import {
     userExitFromAccount,
     getIsUserLogin,
@@ -196,6 +198,19 @@ function AppPanel(){
                                 <IconButton size="large" aria-label="notifications" color="inherit">
                                     <Badge badgeContent={17} color="error">
                                         <NotificationsIcon/>
+                                    </Badge>
+                                </IconButton>
+                            </Link>
+                            <Link to="/subscriptions" style={{ color: "inherit"}}>
+                                <IconButton size="large" aria-label="notifications" color="inherit" >
+                                    <Badge color="error"    >
+                                            <StarIcon
+
+                                                sx={{
+                                                color: 'white',
+                                                background:'linear-gradient(90deg, rgba(56,56,157,1) 51%, rgba(0,212,255,1) 100%)',
+                                                borderRadius: '50px',
+                                            padding:'5px'}} />
                                     </Badge>
                                 </IconButton>
                             </Link>
