@@ -22,6 +22,7 @@ import NotificationList from "../notification-list/NotificationList";
 import Messenger from "../messenger/Messenger";
 import ExhibitionsCalendar from "../exhibitions-calendar/ExhibitionsCalendar";
 import Subscriptions from "../subscriptions/Subscriptions";
+import ExhibitionPage from "../exhibition-page/ExhibitionPage";
 
 
 function NavBar(){
@@ -48,6 +49,7 @@ function NavBar(){
                     <Route path="/messenger" element={<Messenger/>}/>
                     <Route path="/calendar" element={<ExhibitionsCalendar/>}/>
                     <Route path="/subscriptions" element={<Subscriptions/>}/>
+                    <Route path="/exhibition/:exhibitionId" element={<ExhibitionPage/>}/>
                 </Routes>
             </Router>
         </Box>

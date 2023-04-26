@@ -29,6 +29,7 @@ const Subscriptions = () => {
                 'Image size up to 2k',
                 'Artist mark',
                 'Promotion of posted posts',
+                'Opportunity to offer your posts for exhibitions',
                 'Opportunity to post videos in 30 fps',
             ],
         },
@@ -41,6 +42,7 @@ const Subscriptions = () => {
                 'Image size up to 8k',
                 'Author mark',
                 'Promotion of posted posts',
+                'Opportunity to offer your posts for exhibitions',
                 'Opportunity to post videos in 60 fps',
                 'Opportunity to create exhibitions',
                 'Early access to new features',
@@ -154,7 +156,6 @@ const Subscriptions = () => {
                                                                 <>
                                                                     <ListItem>
                                                                         {listItem}
-
                                                                     </ListItem>
                                                                     {index+1 === array.length ? null : <Divider />}
                                                                 </>

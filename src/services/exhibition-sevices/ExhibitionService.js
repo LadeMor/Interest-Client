@@ -6,3 +6,8 @@ export const getAllExhibitions = async () => {
     const res = await getResource(_apiBaseExhibition);
     return res;
 }
+
+export const getExhibitionById = async (id) => {
+    const res = await getResource(`${_apiBaseExhibition}/${id}`);
+    return res;
+}

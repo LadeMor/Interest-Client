@@ -13,6 +13,7 @@ import landscape from "../../img/exhibition-photo-titles/exhibition_preview_1.jp
 import imageRav from "../../img/exhibition-photo-titles/exhibition_preview_2.jpg";
 import {getAllExhibitions} from "../../services/exhibition-sevices/ExhibitionService";
 import './ExhibitionList.css';
+import {Link} from "react-router-dom";
 
 function ExhibitionsList(){
 
@@ -75,7 +76,9 @@ function ExhibitionsList(){
                                    </CardContent>
                                    <CardActions>
                                        <Button size="small">Share</Button>
-                                       <Button size="small">Learn More</Button>
+                                       <Link to={`exhibition/${item.id}`}>
+                                           <Button size="small">Discover</Button>
+                                       </Link>
                                    </CardActions>
                                </>
                             :
