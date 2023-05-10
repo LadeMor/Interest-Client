@@ -1,0 +1,22 @@
+.container{
+    overflow: hidden; /* Скрываем контент, выходящий за границы контейнера */
+    max-height: 0; /* Начальное значение высоты контейнера */
+    transition: max-height 0.5s ease;
+}
+
+.show{
+    /* ... */
+    transition: max-height 0.5s ease;
+    max-height: 1000px; /* Устанавливаем максимальную высоту контейнера при раскрытии */
+}
+
+.arrow-icon{
+    transition: transform 0.4s ease;
+    margin-top: 15px;
+}
+
+
+
+.down {
+    transform: rotate(90deg);
+}
