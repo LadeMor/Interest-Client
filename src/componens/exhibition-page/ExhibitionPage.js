@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getExhibitionById} from "../../services/exhibition-sevices/ExhibitionService";
+import {getFormatDate} from "../functions/DateFunctions";
 import {Container,
     AppBar,
     Toolbar,
@@ -24,10 +25,14 @@ import {Container,
     CardContent,
     CardActions
 } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
 
 const ExhibitionPage = () => {
     const {exhibitionId} = useParams();
     const [exhibitionData, setExhibitionData] = useState(null);
+    const [exhibitionEndDate, setExhibitionEndDate] = useState(null);
+
 
     const [participantsList, setParticipantsList] = useState([
         {
@@ -110,10 +115,47 @@ const ExhibitionPage = () => {
         },
     ]);
 
+
+    const [daysToEnd, setDaysToEnd] = useState(null);
+    const [hoursToEnd, setHoursToEnd] = useState(null);
+    const [minutesToEnd, setMinutesToEnd] = useState(null);
+    const [secondsToEnd, setSecondsToEnd] = useState(null);
+
     useEffect(() => {
         getExhibitionById(exhibitionId)
-            .then(res => setExhibitionData(res));
+            .then(res => {
+                setExhibitionData(res)
+                setExhibitionEndDate(res.date_Of_Ending);
+            });
+
+        const interval = setInterval(() => {
+            const { days, hours, minutes, seconds } = calculateTimeToExhibitionEnd();
+            setDaysToEnd(days < 10 ? `0${days}` : days.toString());
+            setHoursToEnd(hours < 10 ? `0${hours}` : hours.toString());
+            setMinutesToEnd(minutes < 10 ? `0${minutes}` : minutes.toString());
+            setSecondsToEnd(seconds < 10 ? `0${seconds}` : seconds.toString());
+        },1000)
+
+        return () => clearInterval(interval);
     }, [])
+
+    const calculateTimeToExhibitionEnd = () => {
+        let currentDate = new Date();
+        let dateOfEnding = new Date(exhibitionEndDate);
+        let intervalInMilliseconds = dateOfEnding - currentDate;
+
+        const days = Math.floor(intervalInMilliseconds / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((intervalInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((intervalInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((intervalInMilliseconds % (1000 * 60)) / 1000);
+
+        return {
+            days,
+            hours,
+            minutes,
+            seconds
+        }
+    }
 
     return(
         <React.Fragment>
@@ -212,14 +254,11 @@ const ExhibitionPage = () => {
                             >
                                 <Toolbar
                                     style={{paddingRight:0}}>
-                                    <IconButton
-                                        size="large"
-                                        edge="start"
-                                        color="inherit"
-                                        aria-label="menu"
-                                        sx={{ mr: 2 }}
-                                    >
-                                    </IconButton>
+                                    <Link to="/">
+                                        <ArrowBackIcon
+                                            sx={{ fontSize: 40, marginRight:3, textDecoration:'none' }}>
+                                        </ArrowBackIcon>
+                                    </Link>
                                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                         {exhibitionData ? exhibitionData.title : 'Loading...'}
                                     </Typography>
@@ -231,7 +270,18 @@ const ExhibitionPage = () => {
                             </AppBar>
                             <ImageList sx={{ height: 950 }}>
                                 <ImageListItem key="Subheader" cols={2}>
-                                    <ListSubheader component="div">Landscapes</ListSubheader>
+                                    <ListSubheader component="div">
+                                        {/*<Typography variant="h5" sx={{padding:2}}>*/}
+                                        {/*    {daysToEnd && hoursToEnd && minutesToEnd && secondsToEnd ? `Ends in*/}
+                                        {/*    ${daysToEnd}d */}
+                                        {/*    : ${hoursToEnd}h */}
+                                        {/*    : ${minutesToEnd}m */}
+                                        {/*    : ${secondsToEnd}s` : 'Loading...'}*/}
+                                        {/*</Typography>*/}
+                                        <Typography variant="h5" sx={{padding:2}}>
+                                            Ends in {exhibitionEndDate ? getFormatDate(exhibitionEndDate) : 'Loading...'}
+                                        </Typography>
+                                    </ListSubheader>
                                 </ImageListItem>
                                 {imageList.map((item) => (
                                     <ImageListItem key={item.img}>

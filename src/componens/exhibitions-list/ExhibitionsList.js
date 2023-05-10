@@ -14,6 +14,7 @@ import imageRav from "../../img/exhibition-photo-titles/exhibition_preview_2.jpg
 import {getAllExhibitions} from "../../services/exhibition-sevices/ExhibitionService";
 import './ExhibitionList.css';
 import {Link} from "react-router-dom";
+import {getFormatDate} from "../functions/DateFunctions";
 
 function ExhibitionsList(){
 
@@ -24,13 +25,6 @@ function ExhibitionsList(){
             .then(res => setExhibitionList(res))
             .catch(() => console.log("Error"))
     }, [])
-
-    const getFormatDate = (date) => {
-        let postDateCreation = new Date(date);
-        let postMonth = postDateCreation.getMonth()+1 < 10 ? `0${postDateCreation.getMonth()+1}` : postDateCreation.getMonth()+1;
-        let postDay = postDateCreation.getDate() < 10 ? `0${postDateCreation.getDate()}` : postDateCreation.getDate();
-        return `${postDateCreation.getFullYear()}-${postMonth}-${postDay}`;
-    }
 
     const checkExhibitionDate = (dateStart) => {
         let currentDate = new Date(dateStart);
