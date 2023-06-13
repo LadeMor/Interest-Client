@@ -3,30 +3,21 @@ import {useParams} from "react-router-dom";
 import {getExhibitionById} from "../../services/exhibition-sevices/ExhibitionService";
 import {getFormatDate} from "../functions/DateFunctions";
 import {Container,
-    AppBar,
-    Toolbar,
-    IconButton,
-    Typography,
-    Button,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    Divider,
-    Avatar,
-    Box,
-    Grid,
-    ListItemButton,
-    ImageList,
-    ImageListItem,
-    ListSubheader,
-    ImageListItemBar,
-    Card,
-    CardContent,
-    CardActions
+    AppBar, Toolbar,
+    IconButton, Typography,
+    Button, List,
+    ListItem, ListItemAvatar,
+    ListItemText, Divider,
+    Avatar, Box,
+    Grid, ListItemButton,
+    ImageList, ImageListItem,
+    ListSubheader, ImageListItemBar,
+    Card, CardContent,
+    CardActions, Modal
 } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
+import {imageListData} from "./Data";
 
 const ExhibitionPage = () => {
     const {exhibitionId} = useParams();
@@ -66,54 +57,8 @@ const ExhibitionPage = () => {
             profilePicture: 'https://i.pinimg.com/474x/f9/71/4e/f9714e2886c61456e604a89cd4dd2b72.jpg',
         },
     ])
+    const [imageList, setImageList] = useState(imageListData);
 
-    const [imageList, setImageList] = useState([
-        {
-            img: 'https://i.pinimg.com/474x/3c/6d/df/3c6ddff1a21ef317ae7f1f7ea26ac8da.jpg',
-            title: 'Rock',
-            author: 'LadeMor',
-            rows: 2,
-            cols: 2
-        },
-        {
-            img: 'https://i.pinimg.com/474x/8e/52/86/8e52866875dcd3d2d19831505b4b02ad.jpg',
-            title: 'Nature',
-            author: 'Swinson',
-            rows: 2,
-            cols: 2
-        },
-        {
-            img: 'https://i.pinimg.com/474x/16/07/8d/16078d3aabc508ee84bf147d16e4d8a6.jpg',
-            title: 'Painting',
-            author: 'Gaib',
-            rows: 2,
-            cols: 2
-        },
-        {
-            img: 'https://blog.tubikstudio.com/wp-content/uploads/2020/04/Rhaetian-Alps-illustration-tubikarts.jpg',
-            title: 'Sus',
-            author: 'John',
-        },
-        {
-            img: 'https://wallpaperaccess.com/full/176937.jpg',
-            title: 'Sky',
-            author: 'Clare',
-            rows: 2,
-            cols: 2
-        },
-        {
-            img: 'https://c4.wallpaperflare.com/wallpaper/151/453/274/digital-art-digital-painting-fantasy-art-fantasy-landscape-wallpaper-preview.jpg',
-            title: 'View',
-            author: 'LadeMor',
-        },
-        {
-            img: 'https://i.pinimg.com/474x/ca/c3/ef/cac3efae0a1c056aa375f4f2faddc496.jpg',
-            title: 'Cos des',
-            author: 'Anna',
-            rows: 2,
-            cols: 2
-        },
-    ]);
 
 
     const [daysToEnd, setDaysToEnd] = useState(null);
@@ -127,9 +72,12 @@ const ExhibitionPage = () => {
                 setExhibitionData(res)
                 setExhibitionEndDate(res.date_Of_Ending);
             });
+    }, []);
 
+    useEffect(() => {
         const interval = setInterval(() => {
-            const { days, hours, minutes, seconds } = calculateTimeToExhibitionEnd();
+
+            const { days, hours, minutes, seconds } = calculateTimeToExhibitionEnd(exhibitionEndDate);
             setDaysToEnd(days < 10 ? `0${days}` : days.toString());
             setHoursToEnd(hours < 10 ? `0${hours}` : hours.toString());
             setMinutesToEnd(minutes < 10 ? `0${minutes}` : minutes.toString());
@@ -137,11 +85,11 @@ const ExhibitionPage = () => {
         },1000)
 
         return () => clearInterval(interval);
-    }, [])
+    }, [exhibitionEndDate])
 
-    const calculateTimeToExhibitionEnd = () => {
+    const calculateTimeToExhibitionEnd = (date) => {
         let currentDate = new Date();
-        let dateOfEnding = new Date(exhibitionEndDate);
+        let dateOfEnding = new Date(date);
         let intervalInMilliseconds = dateOfEnding - currentDate;
 
         const days = Math.floor(intervalInMilliseconds / (1000 * 60 * 60 * 24));
@@ -156,6 +104,22 @@ const ExhibitionPage = () => {
             seconds
         }
     }
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return(
         <React.Fragment>
@@ -271,39 +235,40 @@ const ExhibitionPage = () => {
                             <ImageList sx={{ height: 950 }}>
                                 <ImageListItem key="Subheader" cols={2}>
                                     <ListSubheader component="div">
-                                        {/*<Typography variant="h5" sx={{padding:2}}>*/}
-                                        {/*    {daysToEnd && hoursToEnd && minutesToEnd && secondsToEnd ? `Ends in*/}
-                                        {/*    ${daysToEnd}d */}
-                                        {/*    : ${hoursToEnd}h */}
-                                        {/*    : ${minutesToEnd}m */}
-                                        {/*    : ${secondsToEnd}s` : 'Loading...'}*/}
-                                        {/*</Typography>*/}
-                                        <Typography variant="h5" sx={{padding:2}}>
-                                            Ends in {exhibitionEndDate ? getFormatDate(exhibitionEndDate) : 'Loading...'}
+                                        <Typography variant="h5" sx={{paddingY:2}}>
+                                            <strong>{daysToEnd && hoursToEnd && minutesToEnd && secondsToEnd ? `Ends in
+                                            ${daysToEnd}d 
+                                            : ${hoursToEnd}h 
+                                            : ${minutesToEnd}m 
+                                            : ${secondsToEnd}s` : 'Loading...'}</strong>
                                         </Typography>
                                     </ListSubheader>
                                 </ImageListItem>
                                 {imageList.map((item) => (
-                                    <ImageListItem key={item.img}>
-                                        <img
-                                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                            alt={item.title}
-                                            loading="lazy"
-                                            style={{height:"500px"}}
-                                        />
-                                        <ImageListItemBar
-                                            title={item.title}
-                                            subtitle={item.author}
-                                            actionIcon={
-                                                <IconButton
-                                                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                                    aria-label={`info about ${item.title}`}
-                                                >
-                                                </IconButton>
-                                            }
-                                        />
-                                    </ImageListItem>
+                                    <>
+                                        <Link to={`exhibition_image/${item.id}`}>
+                                            <ImageListItem key={item.id} >
+                                                <img
+                                                    src={`${item.img}?w=248&fit=crop&auto=format`}
+                                                    srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                                    alt={item.title}
+                                                    loading="lazy"
+                                                    style={{height:"500px"}}
+                                                />
+                                                <ImageListItemBar
+                                                    title={item.title}
+                                                    subtitle={item.author}
+                                                    actionIcon={
+                                                        <IconButton
+                                                            sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                                                            aria-label={`info about ${item.title}`}
+                                                        >
+                                                        </IconButton>
+                                                    }
+                                                />
+                                            </ImageListItem>
+                                        </Link>
+                                    </>
                                 ))}
                             </ImageList>
                         </Box>

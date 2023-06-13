@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "img": "https://i.pinimg.com/474x/3c/6d/df/3c6ddff1a21ef317ae7f1f7ea26ac8da.jpg",
+    "title": "Rock",
+    "author": "LadeMor",
+    "rows": 2,
+    "cols": 2
+  },
+  {
+    "id": 2,
+    "img": "https://i.pinimg.com/474x/8e/52/86/8e52866875dcd3d2d19831505b4b02ad.jpg",
+    "title": "Nature",
+    "author": "Swinson",
+    "rows": 2,
+    "cols": 2
+  },
+  {
+    "id": 3,
+    "img": "https://i.pinimg.com/474x/16/07/8d/16078d3aabc508ee84bf147d16e4d8a6.jpg",
+    "title": "Painting",
+    "author": "Gaib",
+    "rows": 2,
+    "cols": 2
+  },
+  {
+    "id": 4,
+    "img": "https://blog.tubikstudio.com/wp-content/uploads/2020/04/Rhaetian-Alps-illustration-tubikarts.jpg",
+    "title": "Sus",
+    "author": "John"
+  },
+  {
+    "id": 5,
+    "img": "https://wallpaperaccess.com/full/176937.jpg",
+    "title": "Sky",
+    "author": "Clare",
+    "rows": 2,
+    "cols": 2
+  },
+  {
+    "id": 6,
+    "img": "https://c4.wallpaperflare.com/wallpaper/151/453/274/digital-art-digital-painting-fantasy-art-fantasy-landscape-wallpaper-preview.jpg",
+    "title": "View",
+    "author": "LadeMor"
+  },
+  {
+    "id": 7,
+    "img": "https://i.pinimg.com/474x/ca/c3/ef/cac3efae0a1c056aa375f4f2faddc496.jpg",
+    "title": "Cos des",
+    "author": "Anna",
+    "rows": 2,
+    "cols": 2
+  }
+]

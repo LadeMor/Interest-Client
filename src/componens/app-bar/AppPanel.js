@@ -196,7 +196,7 @@ function AppPanel(){
                             </Link>
                             <Link to="/notifications" style={{ color: "inherit"}}>
                                 <IconButton size="large" aria-label="notifications" color="inherit">
-                                    <Badge badgeContent={17} color="error">
+                                    <Badge badgeContent={4} color="error">
                                         <NotificationsIcon/>
                                     </Badge>
                                 </IconButton>

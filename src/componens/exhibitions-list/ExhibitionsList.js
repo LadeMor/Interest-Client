@@ -14,7 +14,7 @@ import imageRav from "../../img/exhibition-photo-titles/exhibition_preview_2.jpg
 import {getAllExhibitions} from "../../services/exhibition-sevices/ExhibitionService";
 import './ExhibitionList.css';
 import {Link} from "react-router-dom";
-import {getFormatDate} from "../functions/DateFunctions";
+import {getFormatDate, getTextMonthFormatDate} from "../functions/DateFunctions";
 
 function ExhibitionsList(){
 
@@ -62,7 +62,7 @@ function ExhibitionsList(){
                                        </Typography>
                                        {checkExhibitionDate(item.date_Of_Starting) ?
                                            <Typography variant="body1" color="text.secondary">
-                                               {getFormatDate(item.date_Of_Starting)} - {getFormatDate(item.date_Of_Ending)}
+                                               {getTextMonthFormatDate(item.date_Of_Starting)} - {getTextMonthFormatDate(item.date_Of_Ending)}
                                            </Typography>
                                            :
                                            null
@@ -82,7 +82,7 @@ function ExhibitionsList(){
                                             <strong>{item.title}</strong>
                                         </Typography>
                                         <Typography gutterBottom variant="h4" component="div">
-                                            Opening: {getFormatDate(item.date_Of_Starting)}
+                                            Opening: {getTextMonthFormatDate(item.date_Of_Starting)}
                                         </Typography>
                                     </Box>
                                 </Container>
