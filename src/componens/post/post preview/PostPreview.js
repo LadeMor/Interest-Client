@@ -141,7 +141,10 @@ function PostPreview({postData}){
                     </Box>
                 </Modal>
                     <Card>
-                        <CardActionArea>
+                        <CardActionArea sx={{
+                            display:'flex',
+                            flexDirection:'row',
+                            justifyContent:'center'}}>
                             <CardMedia
                                 component="img"
                                 image={postData.image}
