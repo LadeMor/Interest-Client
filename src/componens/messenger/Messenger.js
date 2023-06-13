@@ -5,9 +5,11 @@ import {
     List, ListItem,
     ListItemAvatar, Avatar,
     ListItemText, Typography,
-    Divider, TextField
+    TextField,
+    InputAdornment, IconButton
 } from "@mui/material";
 import ImageIcon from '@mui/icons-material/Image';
+import SendIcon from '@mui/icons-material/Send';
 
 
 
@@ -20,7 +22,50 @@ const ChatList = () => {
             id:1,
             companionName: 'John',
             companionPhoto: 'https://i.pinimg.com/474x/78/b0/c7/78b0c7d1f98ddd4d307eecc2c09f3f4b.jpg',
-            lastMessage: 'Hello, INTEREST!'
+            conversationData:[
+                {
+                    id:1,
+                    personType:'user',
+                    content:'Hello, how are you?'
+                },
+                {
+                    id:2,
+                    personType:'companion',
+                    content:'Hello, how are you?'
+                },
+            ]
+        },{
+            id:2,
+            companionName: 'Clare',
+            companionPhoto: 'https://i.pinimg.com/474x/58/2a/4d/582a4d03dbb70b9ea227c5f3850991f2.jpg',
+            conversationData:[
+                {
+                    id:1,
+                    personType:'user',
+                    content:'Hello, how are you?'
+                },
+                {
+                    id:2,
+                    personType:'companion',
+                    content:'Hello, how are you?'
+                },
+            ]
+        },{
+            id:3,
+            companionName: 'DePixel',
+            companionPhoto: 'https://i.pinimg.com/564x/21/db/3c/21db3c92c35b5bab41dc20c2308a61e9.jpg',
+            conversationData:[
+                {
+                    id:1,
+                    personType:'user',
+                    content:'Hello, how are you?'
+                },
+                {
+                    id:2,
+                    personType:'companion',
+                    content:'Hello, how are you?'
+                },
+            ]
         }
     ])
 
@@ -37,7 +82,8 @@ const ChatList = () => {
             }}>
                 <Box sx={{
                     border:'1px solid grey',
-                    padding:'5px',
+                    paddingTop:'5px',
+                    paddingX:'5px',
                     display:'flex',
                     flexDirection:'row',
                     borderRadius:'5px',
@@ -61,7 +107,8 @@ const ChatList = () => {
             }}>
                 <Box sx={{
                     border:'1px solid grey',
-                    padding:'5px',
+                    paddingTop:'5px',
+                    paddingX:'5px',
                     display:'flex',
                     flexDirection:'row',
                     borderRadius:'5px',
@@ -85,11 +132,11 @@ const ChatList = () => {
                 }}>
                     <List sx={{ height: '100%', overflow: 'auto' }}>
                         {chatList.map(item => (
-                            <ListItem key={item.id}>
+                            <ListItem key={item.id} sx={{cursor:'pointer'}}>
                                 <ListItemAvatar>
                                     <Avatar alt="Remy Sharp" src={item.companionPhoto} />
                                 </ListItemAvatar>
-                                <ListItemText primary={item.companionName} secondary={item.lastMessage}/>
+                                <ListItemText primary={item.companionName} secondary={item.conversationData[0].content}/>
                             </ListItem>
                         ))}
                     </List>
@@ -113,7 +160,16 @@ const ChatList = () => {
                         <CompanionMessage text={"Hello, i'm fine, you?"}/>
                     </Box>
 
-                    <TextField id="outlined-basic"  />
+                    <TextField id="outlined-basic"
+                               InputProps={{
+                                   startAdornment: (
+                                       <InputAdornment position="start">
+                                           <IconButton>
+                                               <SendIcon />
+                                           </IconButton>
+                                       </InputAdornment>
+                                   ),
+                               }}/>
                 </Grid>
             </Grid>
         </Container>
