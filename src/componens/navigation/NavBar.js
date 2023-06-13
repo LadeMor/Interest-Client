@@ -23,6 +23,8 @@ import Messenger from "../messenger/Messenger";
 import ExhibitionsCalendar from "../exhibitions-calendar/ExhibitionsCalendar";
 import Subscriptions from "../subscriptions/Subscriptions";
 import ExhibitionPage from "../exhibition-page/ExhibitionPage";
+import ExhibitionCreate from "../exhibition-create/ExhibitionCreate";
+import ExhibitionImagePage from "../exhibition-image-page/ExhibitionImagePage";
 
 
 function NavBar(){
@@ -50,6 +52,8 @@ function NavBar(){
                     <Route path="/calendar" element={<ExhibitionsCalendar/>}/>
                     <Route path="/subscriptions" element={<Subscriptions/>}/>
                     <Route path="/exhibition/:exhibitionId" element={<ExhibitionPage/>}/>
+                    <Route path="/exhibition/exhibition_create" element={<ExhibitionCreate/>}/>
+                    <Route path="/exhibition/:exhibitionId/exhibition_image/:imageId" element={<ExhibitionImagePage/>}/>
                 </Routes>
             </Router>
         </Box>
